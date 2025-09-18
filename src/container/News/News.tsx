@@ -1,13 +1,15 @@
 import { Box, CircularProgress, Container } from "@mui/material";
 import { NewsHeader } from "../../components/NewsHeader/NewsHeader";
 import useNewsController from "./useNewsController";
+import styles from "./styles";
+import NewsCard from "../../components/NewsCard/NewsCard";
 
 export const News = () => {
   const { filters, setFilters, onApplyFilters, news, loading } =
     useNewsController();
 
   return (
-    <Box>
+    <Box sx={styles.root}>
       <NewsHeader
         filters={filters}
         setFilters={setFilters}
