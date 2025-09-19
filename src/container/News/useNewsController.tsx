@@ -35,6 +35,7 @@ const useNewsController = () => {
       let allNews;
 
       if (filters.source) {
+        console.log(filters);
         allNews = await NewsServices[filters.source].fetchNews(filters, page);
       } else {
         const results = await Promise.allSettled(
@@ -72,7 +73,7 @@ const useNewsController = () => {
       },
       true
     );
-  }, [page, filters]);
+  }, [page]);
 
   useEffect(() => {
     setNews([]);

@@ -7,118 +7,106 @@ import {
   Button,
 } from "@mui/material";
 import { Label, Category, ArrowBack } from "@mui/icons-material";
+import useNewsController from "@container/News/useNewsController";
+import { Source, NewsCategory } from "../../types"; // your enums
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const newsSources = [
-  "NewsAPI",
-  "The Guardian",
-  "New York Times",
-  "BBC News",
-  "OpenNews",
-  "NewsCred",
-  "Reuters",
+const newsSources: { label: string; value: Source }[] = [
+  { label: "NewsAPI", value: Source.newsApi },
+  { label: "The Guardian", value: Source.guardian },
+  { label: "New York Times", value: Source.nytime },
 ];
 
-const categories = [
-  "Business",
-  "Technology",
-  "Politics",
-  "Sports",
-  "Entertainment",
-  "Health",
-  "Science",
-  "World",
+const categories: { label: string; value: NewsCategory }[] = [
+  { label: "Technology", value: NewsCategory.technology },
+  { label: "Sports", value: NewsCategory.sports },
+  { label: "Politics", value: NewsCategory.politics },
+  { label: "Business", value: NewsCategory.business },
+  { label: "Entertainment", value: NewsCategory.entertainment },
+  { label: "World", value: NewsCategory.global },
 ];
 
 const PreferencesPage = () => {
-  const [selectedSources, setSelectedSources] = useState<string[]>([]);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const { filters, setFilters, onApplyFilters } = useNewsController();
+  const navigate = useNavigate();
 
-  const toggleSelection = (
-    item: string,
-    selected: string[],
-    setSelected: React.Dispatch<React.SetStateAction<string[]>>
-  ) => {
-    if (selected.includes(item)) {
-      setSelected(selected.filter((i) => i !== item));
-    } else {
-      setSelected([...selected, item]);
-    }
+  const [selectedSource, setSelectedSource] = useState<Source | null>(
+    filters.source || null
+  );
+  const [selectedCategory, setSelectedCategory] = useState<NewsCategory | null>(
+    filters.category || null
+  );
+
+  const handleSourceSelect = (source: Source) => {
+    const newSource = selectedSource === source ? null : source;
+    setSelectedSource(newSource);
+    setFilters((prev) => ({ ...prev, source: newSource }));
+  };
+
+  const handleCategorySelect = (category: NewsCategory) => {
+    const newCategory = selectedCategory === category ? null : category;
+    setSelectedCategory(newCategory);
+    setFilters((prev) => ({ ...prev, category: newCategory }));
   };
 
   return (
     <Box sx={{ p: 4, bgcolor: "#f9fafb", minHeight: "100vh" }}>
-      {/* Page Title */}
       <Typography variant="h4" fontWeight="bold" gutterBottom>
         Personalize Your Feed
       </Typography>
       <Typography variant="body1" color="text.secondary" mb={3}>
-        Tailor your news experience. Select your favorite sources, topics, and
-        authors to build a feed that's perfectly suited to you.
+        Tailor your news experience. Select your favorite source and category to
+        build a feed that's perfectly suited to you.
       </Typography>
 
-      {/* Preferred News Sources */}
+      {/* Preferred News Source */}
       <Card sx={{ mb: 3, borderRadius: 3, boxShadow: 2 }}>
         <CardContent>
           <Box display="flex" alignItems="center" gap={1} mb={1}>
             <Label color="primary" />
             <Typography variant="h6" fontWeight="bold">
-              Preferred News Sources
+              Preferred News Source
             </Typography>
           </Box>
           <Typography variant="body2" color="text.secondary" mb={2}>
-            Choose the publications you trust and enjoy.
+            Choose the publication you trust the most.
           </Typography>
           <Box display="flex" flexWrap="wrap" gap={1}>
-            {newsSources.map((source) => (
+            {newsSources.map(({ label, value }) => (
               <Chip
-                key={source}
-                label={source}
+                key={value}
+                label={label}
                 clickable
-                onClick={() =>
-                  toggleSelection(source, selectedSources, setSelectedSources)
-                }
-                color={selectedSources.includes(source) ? "primary" : "default"}
-                variant={
-                  selectedSources.includes(source) ? "filled" : "outlined"
-                }
+                onClick={() => handleSourceSelect(value)}
+                color={selectedSource === value ? "primary" : "default"}
+                variant={selectedSource === value ? "filled" : "outlined"}
               />
             ))}
           </Box>
         </CardContent>
       </Card>
 
-      {/* Preferred Categories */}
       <Card sx={{ mb: 3, borderRadius: 3, boxShadow: 2 }}>
         <CardContent>
           <Box display="flex" alignItems="center" gap={1} mb={1}>
             <Category color="primary" />
             <Typography variant="h6" fontWeight="bold">
-              Preferred Categories
+              Preferred Category
             </Typography>
           </Box>
           <Typography variant="body2" color="text.secondary" mb={2}>
-            Select the topics that matter most to you.
+            Select the topic that matters most to you.
           </Typography>
           <Box display="flex" flexWrap="wrap" gap={1}>
-            {categories.map((category) => (
+            {categories.map(({ label, value }) => (
               <Chip
-                key={category}
-                label={category}
+                key={value}
+                label={label}
                 clickable
-                onClick={() =>
-                  toggleSelection(
-                    category,
-                    selectedCategories,
-                    setSelectedCategories
-                  )
-                }
-                color={
-                  selectedCategories.includes(category) ? "primary" : "default"
-                }
-                variant={
-                  selectedCategories.includes(category) ? "filled" : "outlined"
-                }
+                onClick={() => handleCategorySelect(value)}
+                color={selectedCategory === value ? "primary" : "default"}
+                variant={selectedCategory === value ? "filled" : "outlined"}
               />
             ))}
           </Box>
@@ -140,6 +128,10 @@ const PreferencesPage = () => {
           color="primary"
           sx={{ borderRadius: 2 }}
           startIcon={<Label />}
+          onClick={() => {
+            onApplyFilters(); // Apply filters to update news feed
+            navigate("/"); // Redirect to home/feed page
+          }}
         >
           Save Preferences
         </Button>
