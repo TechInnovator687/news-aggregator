@@ -1,4 +1,4 @@
-import type { Source } from "../../types/types";
+import { Source } from "../../types";
 
 export type NewsCardProps = {
   title: string;
@@ -7,5 +7,5 @@ export type NewsCardProps = {
   source: string;
   category: string;
   url: string;
-  Sourcekey: keyof typeof Source;
+  Sourcekey: Source;
 };

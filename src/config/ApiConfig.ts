@@ -1,4 +1,4 @@
-import { Source } from "../types/types";
+import { Source } from "../types";
 
 type Source_Value = {
   endpoint: string;
@@ -6,7 +6,7 @@ type Source_Value = {
   page: number;
 };
 
-type API_CONFIG = Record<keyof typeof Source, Source_Value>;
+type API_CONFIG = Record<Source, Source_Value>;
 export const API_CONFIG: API_CONFIG = {
   [Source.guardian]: {
     endpoint: import.meta.env.VITE_GUARDIAN_API_URL as string,

@@ -1,7 +1,5 @@
 import { News } from "./container/News/News";
 
-function App() {
-  return <News />;
-}
+const App = () => <News />;
 
 export default App;

@@ -1,13 +1,13 @@
 import { Box, CircularProgress, Container } from "@mui/material";
+import NewsCard from "../../components/NewsCard";
 import { NewsHeader } from "../../components/NewsHeader/NewsHeader";
 import useNewsController from "./useNewsController";
 import styles from "./styles";
-import NewsCard from "../../components/NewsCard/NewsCard";
 
 export const News = () => {
   const { filters, setFilters, onApplyFilters, news, loading } =
     useNewsController();
-  console.log(news);
+
   return (
     <Box sx={styles.root}>
       <NewsHeader
@@ -18,7 +18,7 @@ export const News = () => {
       <Container maxWidth={false} sx={styles.newsContainer}>
         <Box sx={styles.newsList}>
           {news?.map((newsItem) => (
-            <Box key={newsItem?.title} sx={styles.newsCard}>
+            <Box key={newsItem?.title + 1} sx={styles.newsCard}>
               <NewsCard {...newsItem} />
             </Box>
           ))}

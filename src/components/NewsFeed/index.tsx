@@ -12,8 +12,9 @@ import {
   NewsCategories as categories,
   NewsSources as sources,
 } from "../../config/appConfig";
+import { Source } from "../../types";
 import styles from "./styles";
-import SelectableChip from "../Chip/Chip";
+import SelectableChip from "../SelectableChip/SelectableChip";
 
 interface FeedProps {
   category: string | null;

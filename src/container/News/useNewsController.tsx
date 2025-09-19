@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import type { Filters, NewsItem } from "../../types/types";
-import NewsService from "../../services/NewsService";
+import NewsServices from "../../services";
+import type { Filters, NewsItem } from "../../types";
+import { Source } from "../../types";
 import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 
-const selectedSources = Object.keys(NewsService) as Array<
-  keyof typeof NewsService
->;
+const selectedSources: Source[] = Object.keys(NewsServices) as Source[];
 
 const useNewsController = () => {
   const [filters, setFilters] = useState<Filters>({
@@ -36,13 +35,11 @@ const useNewsController = () => {
       let allNews;
 
       if (filters.source) {
-        allNews = await NewsService[
-          filters.source as keyof typeof NewsService
-        ].fetchNews(filters, page);
+        allNews = await NewsServices[filters.source].fetchNews(filters, page);
       } else {
         const results = await Promise.allSettled(
           selectedSources.map((source) =>
-            NewsService[source].fetchNews(filters, page)
+            NewsServices[source].fetchNews(filters, page)
           )
         );
 

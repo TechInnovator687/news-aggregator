@@ -1,11 +1,7 @@
-import { API_CONFIG } from "../config/ApiConfig";
-import {
-  NewsCategory,
-  Source,
-  type Filters,
-  type NewsItem,
-} from "../types/types";
 import NewsService from "./NewsService";
+import type { Filters, NewsItem } from "../types/";
+import { NewsCategory, Source } from "../types/";
+import { API_CONFIG } from "../config/ApiConfig";
 
 const categoryMapping = {
   [NewsCategory.technology]: "technology",

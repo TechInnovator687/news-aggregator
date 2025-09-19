@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material";
 import NewsFilters from "../../components/NewsFilter";
 import NewsFeed from "../../components/NewsFeed";
+import type { Filters } from "../../types";
 import styles from "./styles";
-import type { Filters } from "../../types/types";
 
 type NewsHeaderProps<T> = {
   filters: Filters;

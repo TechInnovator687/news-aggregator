@@ -1,4 +1,4 @@
-import { NewsCategory, Source } from "../types/types";
+import { NewsCategory, Source } from "../types";
 
 export const NewsCategories = [
   { label: "Technology", value: NewsCategory.technology },

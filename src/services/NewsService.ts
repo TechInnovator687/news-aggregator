@@ -1,4 +1,4 @@
-import type { Filters, NewsItem } from "../types/types";
+import type { Filters, NewsItem } from "../types";
 
 abstract class NewsService<T> {
   protected abstract endpoint: string;

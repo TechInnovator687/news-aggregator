@@ -8,9 +8,9 @@ import {
   Box,
 } from "@mui/material";
 import { AccessTime, CalendarMonth } from "@mui/icons-material";
+import { formatDate, formatTime } from "../../utils/dateTime";
 import styles from "./styles";
 import NewsLogo from "./NewsLogo";
-import { formatDate, formatTime } from "../../utils/dateTime";
 import type { NewsCardProps } from "./types";
 
 const NewsCard = ({

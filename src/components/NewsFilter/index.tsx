@@ -13,6 +13,7 @@ import {
   NewsSources as sources,
 } from "../../config/appConfig";
 import { dateRanges } from "./constants";
+import { Source } from "../../types";
 import styles from "./styles";
 import DropdownSelect from "../DropdownSelect/DropdownSelect";
 
