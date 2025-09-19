@@ -8,7 +8,6 @@ const styles = {
   },
   newsContainer: {
     marginTop: "20px",
-    backgroundColor: "#f5f5f5",
     padding: "20px",
     width: "100%", // respect parent width
     boxSizing: "border-box",
@@ -21,22 +20,19 @@ const styles = {
     marginTop: "100px",
   },
   newsCard: {
-    flex: "1 1 calc(25% - 20px)",
-    maxWidth: "calc(25% - 20px)",
+    flex: "1 1 calc(33.33% - 20px)", // 3 per row on large screens
+    maxWidth: "calc(33.33% - 20px)",
     boxSizing: "border-box",
     "@media (max-width: 1200px)": {
-      flex: "1 1 calc(33.33% - 20px)",
-      maxWidth: "calc(33.33% - 20px)",
-    },
-    "@media (max-width: 900px)": {
-      flex: "1 1 calc(50% - 20px)",
+      flex: "1 1 calc(50% - 20px)", // 2 per row on medium screens
       maxWidth: "calc(50% - 20px)",
     },
-    "@media (max-width: 600px)": {
-      flex: "1 1 100%",
+    "@media (max-width: 900px)": {
+      flex: "1 1 100%", // 1 per row on small screens
       maxWidth: "100%",
     },
   },
+
   newsLoader: {
     display: "flex",
     justifyContent: "center",

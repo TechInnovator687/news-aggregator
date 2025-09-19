@@ -6,46 +6,207 @@ import {
   Button,
   Chip,
   Box,
+  CardMedia,
+  Avatar,
+  Stack,
 } from "@mui/material";
-import { AccessTime, CalendarMonth } from "@mui/icons-material";
-import { formatDate, formatTime } from "../../utils/dateTime";
-import styles from "./styles";
-import NewsLogo from "./NewsLogo";
+import { AccessTime } from "@mui/icons-material";
+import { formatDistanceToNow } from "date-fns";
 import type { NewsCardProps } from "./types";
 
+const getRandomColor = () => {
+  const hue = Math.floor(Math.random() * 360);
+  return {
+    chipBg: `hsl(${hue}, 70%, 90%)`,
+    chipBorder: `hsl(${hue}, 70%, 40%)`,
+    hoverBg: `hsl(${hue}, 70%, 80%)`,
+  };
+};
+
+const sourceChipColors: Record<
+  string,
+  { bg: string; border: string; hoverBg: string }
+> = {
+  Guardian: { bg: "#E0F7FA", border: "#00ACC1", hoverBg: "#B2EBF2" },
+  "NY Times": { bg: "#F3E5F5", border: "#8E24AA", hoverBg: "#E1BEE7" },
+  Reuters: { bg: "#FFF3E0", border: "#FB8C00", hoverBg: "#FFE0B2" },
+};
+
 export const NewsCard = ({
-  title = "Make Your Products In America Or Pay Tariffs: Trump Tells Davos",
-  date,
-  source = "Ny Times",
-  category = "Technology",
-  Sourcekey,
+  title = "Stock Markets Rally as Inflation Shows Signs of Cooling",
+  date = new Date(),
+  source = "NY Times",
+  category = "Business",
+  readTime = "1 min",
+  author = "David Martinez",
   ...otherProps
-}: NewsCardProps) => {
+}: NewsCardProps & { readTime?: string; author?: string }) => {
+  const cardColor = getRandomColor();
+  const sourceColor = sourceChipColors[source] || {
+    bg: "#ECEFF1",
+    border: "#607D8B",
+    hoverBg: "#CFD8DC",
+  };
+
   return (
     <Card
-      sx={styles.card}
+      sx={{
+        width: 380,
+        borderRadius: 3,
+        overflow: "hidden",
+        boxShadow: 3,
+        cursor: "pointer",
+        display: "flex",
+        flexDirection: "column",
+        transition:
+          "transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease-in-out",
+        "&:hover": {
+          transform: "translateY(-6px) scale(1.02)",
+          boxShadow: "0 16px 40px rgba(0,0,0,0.15)",
+          ".news-card-title": {
+            color: "#0d47a1",
+          },
+        },
+      }}
       onClick={() => otherProps.url && window.open(otherProps.url, "_blank")}
     >
-      <CardContent sx={styles.cardContent}>
-        <NewsLogo source={source} SourceKey={Sourcekey} />
-        <Typography variant="h6" sx={styles.title}>
+      <Box sx={{ position: "relative" }}>
+        <CardMedia
+          component="img"
+          height="180"
+          image="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+          alt={title}
+        />
+        <Chip
+          label={source}
+          size="small"
+          className="source-chip"
+          sx={{
+            position: "absolute",
+            top: 12,
+            left: 12,
+            bgcolor: sourceColor.bg,
+            color: sourceColor.border,
+            fontWeight: 600,
+            transition: "all 0.3s ease",
+            "&:hover": {
+              bgcolor: sourceColor.hoverBg,
+            },
+          }}
+        />
+        <Chip
+          icon={<AccessTime sx={{ fontSize: 16, color: "black" }} />}
+          label={readTime}
+          size="small"
+          className="readtime-chip"
+          sx={{
+            position: "absolute",
+            bottom: 12,
+            right: 12,
+            bgcolor: "white",
+            color: "black",
+            border: "1px solid #e0e0e0",
+            ".MuiChip-icon": { color: "black" },
+            transition: "all 0.3s ease",
+            "&:hover": {
+              bgcolor: "#f5f5f5",
+            },
+          }}
+        />
+      </Box>
+      <CardContent sx={{ p: 2, minHeight: 150, flexGrow: 1 }}>
+        <Chip
+          label={category}
+          size="small"
+          className="category-chip"
+          sx={{
+            bgcolor: cardColor.chipBg,
+            color: cardColor.chipBorder,
+            fontWeight: 600,
+            mb: 1,
+            border: `1px solid ${cardColor.chipBorder}`,
+            transition: "all 0.3s ease",
+            "&:hover": {
+              bgcolor: cardColor.hoverBg,
+            },
+          }}
+        />
+        <Typography
+          className="news-card-title"
+          variant="h6"
+          sx={{
+            fontWeight: 700,
+            mb: 1,
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+            color: "black",
+            transition: "color 0.3s ease",
+          }}
+        >
           {title}
         </Typography>
-        <Box sx={styles.dateTimeContainer}>
-          <CalendarMonth sx={styles.icon} color="primary" />
-          <Typography variant="body2" sx={styles.dateText}>
-            {formatDate(date)}
-          </Typography>
-          <AccessTime sx={styles.icon} color="primary" />
-          <Typography variant="body2" sx={styles.dateText}>
-            {formatTime(date)}
-          </Typography>
-        </Box>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+            transition: "color 0.3s ease",
+          }}
+        >
+          Markets celebrate cooling inflation with significant gains across
+          major indices as investors anticipate...
+        </Typography>
       </CardContent>
-
-      <CardActions sx={styles.cardActions}>
-        <Chip label={category} sx={styles.chip} />
-        <Button sx={styles.readMoreButton}>Read More...</Button>
+      <CardActions
+        sx={{
+          px: 2,
+          pb: 1,
+          flexDirection: "column",
+          alignItems: "stretch",
+        }}
+      >
+        <Stack
+          direction="row"
+          spacing={1}
+          alignItems="center"
+          sx={{ width: "100%", mb: 1, justifyContent: "space-between" }}
+        >
+          <Stack direction="row" spacing={1} alignItems="center">
+            <Avatar sx={{ width: 24, height: 24, fontSize: 12 }}>
+              {author[0]}
+            </Avatar>
+            <Typography variant="body2" color="text.secondary">
+              {author}
+            </Typography>
+          </Stack>
+          <Stack direction="row" spacing={0.5} alignItems="center">
+            <AccessTime sx={{ fontSize: 16, color: "text.secondary" }} />
+            <Typography variant="body2" color="text.secondary">
+              {formatDistanceToNow(date, { addSuffix: true })}
+            </Typography>
+          </Stack>
+        </Stack>
+        <Button
+          variant="outlined"
+          fullWidth
+          className="readmore-button"
+          sx={{
+            borderRadius: 2,
+            textTransform: "none",
+            fontWeight: 600,
+            transition: "all 0.3s ease",
+            "&:hover": {
+              bgcolor: "rgba(0,0,0,0.08)",
+            },
+          }}
+        >
+          Read More
+        </Button>
       </CardActions>
     </Card>
   );
