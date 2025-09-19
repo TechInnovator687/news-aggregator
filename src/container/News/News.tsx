@@ -10,11 +10,11 @@ export const News = () => {
 
   return (
     <Box sx={styles.root}>
-      <NewsHeader
+      {/* <NewsHeader
         filters={filters}
         setFilters={setFilters}
         onApplyFilters={onApplyFilters}
-      />
+      /> */}
       <Container maxWidth={false} sx={styles.newsContainer}>
         <Box sx={styles.newsList}>
           {news?.map((newsItem) => (
