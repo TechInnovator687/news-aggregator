@@ -9,56 +9,53 @@ import {
 } from "@mui/material";
 import { Search, FilterAlt, Label, Category } from "@mui/icons-material";
 import { useState } from "react";
+import { Source, NewsCategory } from "../../types"; // your enums
+import { useNews } from "@/context/NewsContext";
 
-const newsSources = [
-  "NewsAPI",
-  "The Guardian",
-  "New York Times",
-  "BBC News",
-  "OpenNews",
-  "NewsCred",
-  "Reuters",
+const newsSources: { label: string; value: Source }[] = [
+  { label: "NewsAPI", value: Source.newsApi },
+  { label: "The Guardian", value: Source.guardian },
+  { label: "New York Times", value: Source.nytime },
 ];
 
-const categories = [
-  "Business",
-  "Technology",
-  "Politics",
-  "Sports",
-  "Entertainment",
-  "Health",
-  "Science",
-  "World",
+const categories: { label: string; value: NewsCategory }[] = [
+  { label: "Technology", value: NewsCategory.technology },
+  { label: "Sports", value: NewsCategory.sports },
+  { label: "Politics", value: NewsCategory.politics },
+  { label: "Business", value: NewsCategory.business },
+  { label: "Entertainment", value: NewsCategory.entertainment },
+  { label: "World", value: NewsCategory.global },
 ];
 
 const FilterSearch = () => {
-  const [keywords, setKeywords] = useState("");
-  const [selectedSources, setSelectedSources] = useState<string[]>([]);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const { filters, setFilters, onApplyFilters } = useNews();
+  const [keywords, setKeywords] = useState(filters.keyword || "");
+  const [selectedSource, setSelectedSource] = useState<Source | null>(
+    filters.source || null
+  );
+  const [selectedCategory, setSelectedCategory] = useState<NewsCategory | null>(
+    filters.category || null
+  );
 
-  const toggleSelection = (
-    item: string,
-    selected: string[],
-    setSelected: React.Dispatch<React.SetStateAction<string[]>>
-  ) => {
-    if (selected.includes(item)) {
-      setSelected(selected.filter((i) => i !== item));
-    } else {
-      setSelected([...selected, item]);
-    }
+  const handleSourceSelect = (source: Source) => {
+    const newSource = selectedSource === source ? null : source;
+    setSelectedSource(newSource);
+    setFilters((prev) => ({ ...prev, source: newSource }));
+  };
+
+  const handleCategorySelect = (category: NewsCategory) => {
+    const newCategory = selectedCategory === category ? null : category;
+    setSelectedCategory(newCategory);
+    setFilters((prev) => ({ ...prev, category: newCategory }));
   };
 
   const handleSearch = () => {
-    console.log({
-      keywords,
-      selectedSources,
-      selectedCategories,
-    });
+    setFilters((prev) => ({ ...prev, keyword: keywords }));
+    onApplyFilters(); // Apply the selected filters
   };
 
   return (
     <Box sx={{ p: 4, bgcolor: "#f9fafb", minHeight: "100vh" }}>
-      {/* Page Title */}
       <Typography variant="h4" fontWeight="bold" gutterBottom>
         Filter & Search
       </Typography>
@@ -66,7 +63,7 @@ const FilterSearch = () => {
         Refine your search to find exactly what you're looking for.
       </Typography>
 
-      {/* Keywords Section */}
+      {/* Keywords */}
       <Card sx={{ mb: 3, borderRadius: 3, boxShadow: 2 }}>
         <CardContent>
           <Box display="flex" alignItems="center" gap={1} mb={1}>
@@ -75,9 +72,6 @@ const FilterSearch = () => {
               Keywords
             </Typography>
           </Box>
-          <Typography variant="body2" color="text.secondary" mb={2}>
-            Enter keywords to narrow down your search results.
-          </Typography>
           <TextField
             placeholder="e.g. 'AI safety'"
             fullWidth
@@ -88,7 +82,7 @@ const FilterSearch = () => {
         </CardContent>
       </Card>
 
-      {/* Sources Section */}
+      {/* Sources */}
       <Card sx={{ mb: 3, borderRadius: 3, boxShadow: 2 }}>
         <CardContent>
           <Box display="flex" alignItems="center" gap={1} mb={1}>
@@ -97,29 +91,22 @@ const FilterSearch = () => {
               Sources
             </Typography>
           </Box>
-          <Typography variant="body2" color="text.secondary" mb={2}>
-            Choose the publications you want to search from.
-          </Typography>
           <Box display="flex" flexWrap="wrap" gap={1}>
-            {newsSources.map((source) => (
+            {newsSources.map(({ label, value }) => (
               <Chip
-                key={source}
-                label={source}
+                key={value}
+                label={label}
                 clickable
-                onClick={() =>
-                  toggleSelection(source, selectedSources, setSelectedSources)
-                }
-                color={selectedSources.includes(source) ? "primary" : "default"}
-                variant={
-                  selectedSources.includes(source) ? "filled" : "outlined"
-                }
+                onClick={() => handleSourceSelect(value)}
+                color={selectedSource === value ? "primary" : "default"}
+                variant={selectedSource === value ? "filled" : "outlined"}
               />
             ))}
           </Box>
         </CardContent>
       </Card>
 
-      {/* Categories Section */}
+      {/* Categories */}
       <Card sx={{ mb: 3, borderRadius: 3, boxShadow: 2 }}>
         <CardContent>
           <Box display="flex" alignItems="center" gap={1} mb={1}>
@@ -128,33 +115,21 @@ const FilterSearch = () => {
               Categories
             </Typography>
           </Box>
-          <Typography variant="body2" color="text.secondary" mb={2}>
-            Select the categories you want to filter.
-          </Typography>
           <Box display="flex" flexWrap="wrap" gap={1}>
-            {categories.map((cat) => (
+            {categories.map(({ label, value }) => (
               <Chip
-                key={cat}
-                label={cat}
+                key={value}
+                label={label}
                 clickable
-                onClick={() =>
-                  toggleSelection(
-                    cat,
-                    selectedCategories,
-                    setSelectedCategories
-                  )
-                }
-                color={selectedCategories.includes(cat) ? "primary" : "default"}
-                variant={
-                  selectedCategories.includes(cat) ? "filled" : "outlined"
-                }
+                onClick={() => handleCategorySelect(value)}
+                color={selectedCategory === value ? "primary" : "default"}
+                variant={selectedCategory === value ? "filled" : "outlined"}
               />
             ))}
           </Box>
         </CardContent>
       </Card>
 
-      {/* Search Button */}
       <Box display="flex" justifyContent="flex-end" mt={3}>
         <Button
           variant="contained"
