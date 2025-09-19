@@ -4,11 +4,9 @@ import {
   Card,
   CardContent,
   Chip,
-  TextField,
-  IconButton,
   Button,
 } from "@mui/material";
-import { Add, Label, Category, Person, ArrowBack } from "@mui/icons-material";
+import { Label, Category, ArrowBack } from "@mui/icons-material";
 import { useState } from "react";
 
 const newsSources = [
@@ -35,8 +33,6 @@ const categories = [
 const PreferencesPage = () => {
   const [selectedSources, setSelectedSources] = useState<string[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [authors, setAuthors] = useState<string[]>([]);
-  const [newAuthor, setNewAuthor] = useState("");
 
   const toggleSelection = (
     item: string,
@@ -47,13 +43,6 @@ const PreferencesPage = () => {
       setSelected(selected.filter((i) => i !== item));
     } else {
       setSelected([...selected, item]);
-    }
-  };
-
-  const addAuthor = () => {
-    if (newAuthor.trim() && !authors.includes(newAuthor)) {
-      setAuthors([...authors, newAuthor.trim()]);
-      setNewAuthor("");
     }
   };
 
@@ -130,43 +119,6 @@ const PreferencesPage = () => {
                 variant={
                   selectedCategories.includes(category) ? "filled" : "outlined"
                 }
-              />
-            ))}
-          </Box>
-        </CardContent>
-      </Card>
-
-      {/* Follow Authors */}
-      <Card sx={{ mb: 3, borderRadius: 3, boxShadow: 2 }}>
-        <CardContent>
-          <Box display="flex" alignItems="center" gap={1} mb={1}>
-            <Person color="primary" />
-            <Typography variant="h6" fontWeight="bold">
-              Follow Authors
-            </Typography>
-          </Box>
-          <Typography variant="body2" color="text.secondary" mb={2}>
-            Add specific authors to never miss their work.
-          </Typography>
-          <Box display="flex" gap={1} alignItems="center">
-            <TextField
-              placeholder="Enter author name..."
-              size="small"
-              value={newAuthor}
-              onChange={(e) => setNewAuthor(e.target.value)}
-              sx={{ flexGrow: 1 }}
-            />
-            <IconButton color="primary" onClick={addAuthor}>
-              <Add />
-            </IconButton>
-          </Box>
-          <Box display="flex" gap={1} flexWrap="wrap" mt={2}>
-            {authors.map((author) => (
-              <Chip
-                key={author}
-                label={author}
-                onDelete={() => setAuthors(authors.filter((a) => a !== author))}
-                color="primary"
               />
             ))}
           </Box>
