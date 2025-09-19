@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useInfiniteScroll = (
+export const useInfiniteScroll = (
   loading: boolean,
   hasFetched: boolean,
   loadMore: () => void
@@ -34,5 +34,3 @@ const useInfiniteScroll = (
 
   return;
 };
-
-export default useInfiniteScroll;

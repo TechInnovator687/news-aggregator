@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import NewsServices from "../../services";
 import type { Filters, NewsItem } from "../../types";
 import { Source } from "../../types";
-import useInfiniteScroll from "../../hooks/useInfiniteScroll";
+import { useInfiniteScroll } from "@hooks/useInfiniteScroll";
 
 const selectedSources: Source[] = Object.keys(NewsServices) as Source[];
 
