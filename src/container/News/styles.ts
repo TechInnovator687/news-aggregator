@@ -3,13 +3,13 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     minHeight: "100vh",
-    flex: 1, // fill available space, instead of width: 100vw
-    overflowX: "hidden", // prevent horizontal scroll
+    flex: 1,
+    overflowX: "hidden",
   },
   newsContainer: {
     marginTop: "20px",
     padding: "20px",
-    width: "100%", // respect parent width
+    width: "100%",
     boxSizing: "border-box",
   },
   newsList: {
@@ -20,15 +20,15 @@ const styles = {
     marginTop: "100px",
   },
   newsCard: {
-    flex: "1 1 calc(33.33% - 20px)", // 3 per row on large screens
+    flex: "1 1 calc(33.33% - 20px)",
     maxWidth: "calc(33.33% - 20px)",
     boxSizing: "border-box",
     "@media (max-width: 1200px)": {
-      flex: "1 1 calc(50% - 20px)", // 2 per row on medium screens
+      flex: "1 1 calc(50% - 20px)",
       maxWidth: "calc(50% - 20px)",
     },
     "@media (max-width: 900px)": {
-      flex: "1 1 100%", // 1 per row on small screens
+      flex: "1 1 100%",
       maxWidth: "100%",
     },
   },

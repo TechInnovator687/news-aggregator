@@ -6,7 +6,7 @@ export const NewsContext = createContext<ReturnType<
 > | null>(null);
 
 export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
-  const newsController = useNewsController(); // single shared instance
+  const newsController = useNewsController();
   return (
     <NewsContext.Provider value={newsController}>
       {children}

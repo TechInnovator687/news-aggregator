@@ -29,7 +29,6 @@ const SidePanel = () => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      {/* Sidebar Drawer */}
       <Drawer
         variant="permanent"
         sx={{
@@ -44,7 +43,6 @@ const SidePanel = () => {
         }}
       >
         <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
-          {/* Header */}
           <Box sx={{ p: 3, display: "flex", alignItems: "center", gap: 1 }}>
             <Box
               sx={{
@@ -69,7 +67,6 @@ const SidePanel = () => {
             </Box>
           </Box>
 
-          {/* Main Menu */}
           <Box sx={{ px: 2, mt: 1 }}>
             <Typography
               variant="caption"
@@ -108,7 +105,6 @@ const SidePanel = () => {
                       },
                     }}
                   >
-                    {/* Left content: Icon + Label */}
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                       <ListItemIcon
                         sx={{
@@ -121,7 +117,6 @@ const SidePanel = () => {
                       <ListItemText primary={item.label} />
                     </Box>
 
-                    {/* Right-side dot */}
                     <Box
                       sx={{
                         width: 10,
@@ -136,7 +131,6 @@ const SidePanel = () => {
             </List>
           </Box>
 
-          {/* Quick Stats */}
           <Box sx={{ px: 2, mt: 2 }}>
             <Typography
               variant="caption"
@@ -175,7 +169,6 @@ const SidePanel = () => {
 
           <Box sx={{ flexGrow: 1 }} />
 
-          {/* Footer User Info */}
           <Divider />
           <Box sx={{ p: 2, display: "flex", alignItems: "center", gap: 1 }}>
             <Avatar sx={{ width: 32, height: 32, bgcolor: "grey.200" }}>
@@ -193,7 +186,6 @@ const SidePanel = () => {
         </Box>
       </Drawer>
 
-      {/* Main Content */}
       <Box
         component="main"
         sx={{ flexGrow: 1, bgcolor: "#f9fafb", p: 3, minHeight: "100vh" }}
