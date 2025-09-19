@@ -24,7 +24,7 @@ interface FeedProps {
   onApplyFilters: () => void;
 }
 
-const Feed: React.FC<FeedProps> = ({
+const NewsFeed: React.FC<FeedProps> = ({
   category,
   source,
   onCategoryChange,
@@ -95,4 +95,4 @@ const Feed: React.FC<FeedProps> = ({
   );
 };
 
-export default Feed;
+export default NewsFeed;

@@ -29,7 +29,7 @@ interface FiltersProps {
   onApplyFilters: () => void;
 }
 
-const Filters: React.FC<FiltersProps> = ({
+const NewsFilter: React.FC<FiltersProps> = ({
   category,
   source,
   keyword,
@@ -95,4 +95,4 @@ const Filters: React.FC<FiltersProps> = ({
   );
 };
 
-export default Filters;
+export default NewsFilter;

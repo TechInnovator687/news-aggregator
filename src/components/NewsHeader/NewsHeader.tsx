@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
-import NewsFilters from "../../components/NewsFilter";
-import NewsFeed from "../../components/NewsFeed";
+import NewsFilters from "../NewsFilter/NewsFilter";
+import NewsFeed from "../NewsFeed/NewsFeed";
 import type { Filters } from "../../types";
 import styles from "./styles";
 
