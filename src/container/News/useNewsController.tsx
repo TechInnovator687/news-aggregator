@@ -17,17 +17,16 @@ const useNewsController = () => {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
 
-  const loadMore = () => {
-    setPage((prevPage) => prevPage + 1);
-  };
+  const [filtersApplied, setFiltersApplied] = useState(false); // track applied filters
+
+  const loadMore = () => setPage((prev) => prev + 1);
 
   useInfiniteScroll(loading, false, loadMore);
 
   const fetchNews = async (
     filters: Filters,
     page: number,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    updateNews: (news: any[]) => void,
+    updateNews: (news: NewsItem[]) => void,
     shouldSort: boolean = true
   ) => {
     setLoading(true);
@@ -35,45 +34,41 @@ const useNewsController = () => {
       let allNews;
 
       if (filters.source) {
-        console.log(filters);
-        allNews = await NewsServices[filters.source].fetchNews(filters, page);
+        allNews = await NewsServices[filters.source]?.fetchNews(filters, page);
       } else {
         const results = await Promise.allSettled(
           selectedSources.map((source) =>
-            NewsServices[source].fetchNews(filters, page)
+            NewsServices[source]?.fetchNews(filters, page)
           )
         );
 
         allNews = results
-          .filter((result) => result.status === "fulfilled")
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          .flatMap((result) => (result as PromiseFulfilledResult<any[]>).value);
+          .filter((res) => res.status === "fulfilled")
+          .flatMap((res) => (res as PromiseFulfilledResult<NewsItem[]>).value);
       }
 
       if (shouldSort) {
-        allNews = allNews.sort(
+        allNews.sort(
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
         );
       }
 
       updateNews(allNews);
-    } catch (error) {
-      console.error("Error fetching news:", error);
+    } catch (err) {
+      console.error("Error fetching news:", err);
     } finally {
       setLoading(false);
     }
   };
 
+  // Fetch default news only if no filters applied yet
   useEffect(() => {
-    fetchNews(
-      filters,
-      page,
-      (sortedArticles) => {
-        setNews((prevNews) => [...prevNews, ...sortedArticles]);
-      },
-      true
-    );
-  }, [page]);
+    const appendNews = (fetched: NewsItem[]) => {
+      setNews((prev) => [...prev, ...fetched]);
+    };
+
+    fetchNews(filters, page, appendNews, true);
+  }, [page, filters]);
 
   useEffect(() => {
     setNews([]);
@@ -81,17 +76,11 @@ const useNewsController = () => {
   }, [filters]);
 
   const onApplyFilters = async () => {
-    fetchNews(
-      filters,
-      page,
-      (allNews) => {
-        setNews(allNews);
-      },
-      false
-    );
+    setFiltersApplied(true); // mark filters applied
+    fetchNews(filters, 1, (allNews) => setNews(allNews), false);
   };
 
-  return { filters, setFilters, onApplyFilters, news, loading };
+  return { filters, setFilters, news, loading, onApplyFilters };
 };
 
 export default useNewsController;

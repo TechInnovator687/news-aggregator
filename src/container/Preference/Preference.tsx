@@ -7,10 +7,10 @@ import {
   Button,
 } from "@mui/material";
 import { Label, Category, ArrowBack } from "@mui/icons-material";
-import useNewsController from "@container/News/useNewsController";
-import { Source, NewsCategory } from "../../types"; // your enums
+import { Source, NewsCategory } from "../../types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useNews } from "@/context/NewsContext";
 
 const newsSources: { label: string; value: Source }[] = [
   { label: "NewsAPI", value: Source.newsApi },
@@ -27,8 +27,8 @@ const categories: { label: string; value: NewsCategory }[] = [
   { label: "World", value: NewsCategory.global },
 ];
 
-const PreferencesPage = () => {
-  const { filters, setFilters, onApplyFilters } = useNewsController();
+const Preference = () => {
+  const { filters, setFilters, onApplyFilters } = useNews();
   const navigate = useNavigate();
 
   const [selectedSource, setSelectedSource] = useState<Source | null>(
@@ -56,21 +56,13 @@ const PreferencesPage = () => {
         Personalize Your Feed
       </Typography>
       <Typography variant="body1" color="text.secondary" mb={3}>
-        Tailor your news experience. Select your favorite source and category to
-        build a feed that's perfectly suited to you.
+        Tailor your news experience. Select your favorite source and category.
       </Typography>
 
-      {/* Preferred News Source */}
       <Card sx={{ mb: 3, borderRadius: 3, boxShadow: 2 }}>
         <CardContent>
-          <Box display="flex" alignItems="center" gap={1} mb={1}>
-            <Label color="primary" />
-            <Typography variant="h6" fontWeight="bold">
-              Preferred News Source
-            </Typography>
-          </Box>
-          <Typography variant="body2" color="text.secondary" mb={2}>
-            Choose the publication you trust the most.
+          <Typography variant="h6" fontWeight="bold" mb={1}>
+            Preferred News Source
           </Typography>
           <Box display="flex" flexWrap="wrap" gap={1}>
             {newsSources.map(({ label, value }) => (
@@ -89,14 +81,8 @@ const PreferencesPage = () => {
 
       <Card sx={{ mb: 3, borderRadius: 3, boxShadow: 2 }}>
         <CardContent>
-          <Box display="flex" alignItems="center" gap={1} mb={1}>
-            <Category color="primary" />
-            <Typography variant="h6" fontWeight="bold">
-              Preferred Category
-            </Typography>
-          </Box>
-          <Typography variant="body2" color="text.secondary" mb={2}>
-            Select the topic that matters most to you.
+          <Typography variant="h6" fontWeight="bold" mb={1}>
+            Preferred Category
           </Typography>
           <Box display="flex" flexWrap="wrap" gap={1}>
             {categories.map(({ label, value }) => (
@@ -113,24 +99,21 @@ const PreferencesPage = () => {
         </CardContent>
       </Card>
 
-      {/* Action Buttons */}
       <Box display="flex" justifyContent="space-between" mt={3}>
         <Button
           variant="outlined"
-          color="inherit"
           startIcon={<ArrowBack />}
-          sx={{ borderRadius: 2 }}
+          onClick={() => navigate("/")}
         >
           Back to Feed
         </Button>
         <Button
           variant="contained"
           color="primary"
-          sx={{ borderRadius: 2 }}
           startIcon={<Label />}
           onClick={() => {
-            onApplyFilters(); // Apply filters to update news feed
-            navigate("/"); // Redirect to home/feed page
+            onApplyFilters();
+            navigate("/"); // redirect after applying filters
           }}
         >
           Save Preferences
@@ -140,4 +123,4 @@ const PreferencesPage = () => {
   );
 };
 
-export default PreferencesPage;
+export default Preference;
