@@ -7,7 +7,7 @@ import NewsCard from "../../components/NewsCard/NewsCard";
 export const News = () => {
   const { filters, setFilters, onApplyFilters, news, loading } =
     useNewsController();
-
+  console.log(news);
   return (
     <Box sx={styles.root}>
       <NewsHeader
