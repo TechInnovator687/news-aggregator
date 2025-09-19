@@ -11,10 +11,10 @@ import {
 import {
   NewsCategories as categories,
   NewsSources as sources,
-} from "../../config/appConfig";
+} from "@config/appConfig";
 import { Source } from "../../types";
 import styles from "./styles";
-import { SelectableChip } from "../SelectableChip";
+import { SelectableChip } from "@components/SelectableChip";
 
 interface FeedProps {
   category: string | null;

@@ -1,8 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import type { Filters } from "../../types";
 import styles from "./styles";
-import { NewsFeed } from "../NewsFeed";
-import { NewsFilter } from "../NewsFilter";
+import { NewsFeed } from "@components/NewsFeed";
+import { NewsFilter } from "@components/NewsFilter";
+
 type NewsHeaderProps<T> = {
   filters: Filters;
   setFilters: React.Dispatch<React.SetStateAction<T>>;

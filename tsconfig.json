@@ -4,11 +4,11 @@
     "paths": {
       "@components/*": ["components/*"],
       "@config/*": ["config/*"],
-      "@config": ["config/index.ts"],
       "@hooks/*": ["hooks/*"],
       "@services/*": ["services/*"],
       "@types/*": ["types/*"],
       "@utils/*": ["utils/*"],
+      "@container/*": ["container/*"],
       "@/*": ["*"]
     }
   },

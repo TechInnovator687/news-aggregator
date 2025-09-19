@@ -1,4 +1,4 @@
-import { News } from "./container/News/News";
+import { News } from "@container/News";
 
 const App = () => <News />;
 

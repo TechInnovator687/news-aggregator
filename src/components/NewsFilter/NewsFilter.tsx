@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Box,
   IconButton,
@@ -15,7 +15,7 @@ import {
 import { dateRanges } from "./constants";
 import { Source } from "../../types";
 import styles from "./styles";
-import { DropdownSelect } from "../DropdownSelect";
+import { DropdownSelect } from "@components/DropdownSelect";
 
 interface FiltersProps {
   category: string | null;
