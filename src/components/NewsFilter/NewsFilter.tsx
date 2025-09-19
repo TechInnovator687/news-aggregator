@@ -11,7 +11,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import {
   NewsCategories as categories,
   NewsSources as sources,
-} from "../../config/appConfig";
+} from "@config/appConfig";
 import { dateRanges } from "./constants";
 import { Source } from "../../types";
 import styles from "./styles";
