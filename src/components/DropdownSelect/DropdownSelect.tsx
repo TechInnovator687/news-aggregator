@@ -7,7 +7,7 @@ interface DropdownSelectProps<T> {
   onChange: (value: T) => void;
 }
 
-const DropdownSelect = <T,>({
+export const DropdownSelect = <T,>({
   label,
   value,
   options,
@@ -31,5 +31,3 @@ const DropdownSelect = <T,>({
     </TextField>
   );
 };
-
-export default DropdownSelect;

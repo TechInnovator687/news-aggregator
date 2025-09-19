@@ -15,7 +15,7 @@ import {
 import { dateRanges } from "./constants";
 import { Source } from "../../types";
 import styles from "./styles";
-import DropdownSelect from "../DropdownSelect/DropdownSelect";
+import { DropdownSelect } from "../DropdownSelect";
 
 interface FiltersProps {
   category: string | null;
@@ -29,7 +29,7 @@ interface FiltersProps {
   onApplyFilters: () => void;
 }
 
-const NewsFilter: React.FC<FiltersProps> = ({
+export const NewsFilter = ({
   category,
   source,
   keyword,
@@ -39,7 +39,7 @@ const NewsFilter: React.FC<FiltersProps> = ({
   onKeywordChange,
   onDateRangeChange,
   onApplyFilters,
-}) => {
+}: FiltersProps) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -94,5 +94,3 @@ const NewsFilter: React.FC<FiltersProps> = ({
     </Box>
   );
 };
-
-export default NewsFilter;

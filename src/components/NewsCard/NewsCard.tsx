@@ -13,7 +13,7 @@ import styles from "./styles";
 import NewsLogo from "./NewsLogo";
 import type { NewsCardProps } from "./types";
 
-const NewsCard = ({
+export const NewsCard = ({
   title = "Make Your Products In America Or Pay Tariffs: Trump Tells Davos",
   date,
   source = "Ny Times",
@@ -50,5 +50,3 @@ const NewsCard = ({
     </Card>
   );
 };
-
-export default NewsCard;

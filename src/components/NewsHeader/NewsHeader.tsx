@@ -1,9 +1,8 @@
 import { Box, Typography } from "@mui/material";
-import NewsFilters from "../NewsFilter/NewsFilter";
-import NewsFeed from "../NewsFeed/NewsFeed";
 import type { Filters } from "../../types";
 import styles from "./styles";
-
+import { NewsFeed } from "../NewsFeed";
+import { NewsFilter } from "../NewsFilter";
 type NewsHeaderProps<T> = {
   filters: Filters;
   setFilters: React.Dispatch<React.SetStateAction<T>>;
@@ -31,7 +30,7 @@ export const NewsHeader = <T,>({
         onSourceChange={(source) => setFilters((prev) => ({ ...prev, source }))}
         onApplyFilters={onApplyFilters}
       />
-      <NewsFilters
+      <NewsFilter
         category={filters.category}
         source={filters.source}
         keyword={filters.keyword}

@@ -1,4 +1,3 @@
-import React from "react";
 import { Chip } from "@mui/material";
 import styles from "./styles";
 
@@ -8,11 +7,11 @@ interface SelectableChipProps {
   onClick: () => void;
 }
 
-const SelectableChip: React.FC<SelectableChipProps> = ({
+export const SelectableChip = ({
   label,
   selected,
   onClick,
-}) => {
+}: SelectableChipProps) => {
   return (
     <Chip
       label={label}
@@ -23,5 +22,3 @@ const SelectableChip: React.FC<SelectableChipProps> = ({
     />
   );
 };
-
-export default SelectableChip;

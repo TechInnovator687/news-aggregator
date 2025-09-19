@@ -14,7 +14,7 @@ import {
 } from "../../config/appConfig";
 import { Source } from "../../types";
 import styles from "./styles";
-import SelectableChip from "../SelectableChip/SelectableChip";
+import { SelectableChip } from "../SelectableChip";
 
 interface FeedProps {
   category: string | null;
@@ -24,13 +24,13 @@ interface FeedProps {
   onApplyFilters: () => void;
 }
 
-const NewsFeed: React.FC<FeedProps> = ({
+export const NewsFeed = ({
   category,
   source,
   onCategoryChange,
   onSourceChange,
   onApplyFilters,
-}) => {
+}: FeedProps) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -94,5 +94,3 @@ const NewsFeed: React.FC<FeedProps> = ({
     </ClickAwayListener>
   );
 };
-
-export default NewsFeed;
