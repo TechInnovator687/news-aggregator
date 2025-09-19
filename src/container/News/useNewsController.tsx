@@ -17,8 +17,6 @@ const useNewsController = () => {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
 
-  const [filtersApplied, setFiltersApplied] = useState(false); // track applied filters
-
   const loadMore = () => setPage((prev) => prev + 1);
 
   useInfiniteScroll(loading, false, loadMore);
@@ -61,7 +59,6 @@ const useNewsController = () => {
     }
   };
 
-  // Fetch default news only if no filters applied yet
   useEffect(() => {
     const appendNews = (fetched: NewsItem[]) => {
       setNews((prev) => [...prev, ...fetched]);
@@ -76,7 +73,6 @@ const useNewsController = () => {
   }, [filters]);
 
   const onApplyFilters = async () => {
-    setFiltersApplied(true); // mark filters applied
     fetchNews(filters, 1, (allNews) => setNews(allNews), false);
   };
 

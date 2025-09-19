@@ -9,8 +9,9 @@ import {
 } from "@mui/material";
 import { Search, FilterAlt, Label, Category } from "@mui/icons-material";
 import { useState } from "react";
-import { Source, NewsCategory } from "../../types"; // your enums
+import { Source, NewsCategory } from "../../types";
 import { useNews } from "@/context/NewsContext";
+import { useNavigate } from "react-router-dom";
 
 const newsSources: { label: string; value: Source }[] = [
   { label: "NewsAPI", value: Source.newsApi },
@@ -36,6 +37,7 @@ const FilterSearch = () => {
   const [selectedCategory, setSelectedCategory] = useState<NewsCategory | null>(
     filters.category || null
   );
+  const navigate = useNavigate();
 
   const handleSourceSelect = (source: Source) => {
     const newSource = selectedSource === source ? null : source;
@@ -51,7 +53,8 @@ const FilterSearch = () => {
 
   const handleSearch = () => {
     setFilters((prev) => ({ ...prev, keyword: keywords }));
-    onApplyFilters(); // Apply the selected filters
+    onApplyFilters();
+    navigate("/");
   };
 
   return (
@@ -63,7 +66,6 @@ const FilterSearch = () => {
         Refine your search to find exactly what you're looking for.
       </Typography>
 
-      {/* Keywords */}
       <Card sx={{ mb: 3, borderRadius: 3, boxShadow: 2 }}>
         <CardContent>
           <Box display="flex" alignItems="center" gap={1} mb={1}>
@@ -82,7 +84,6 @@ const FilterSearch = () => {
         </CardContent>
       </Card>
 
-      {/* Sources */}
       <Card sx={{ mb: 3, borderRadius: 3, boxShadow: 2 }}>
         <CardContent>
           <Box display="flex" alignItems="center" gap={1} mb={1}>
@@ -106,7 +107,6 @@ const FilterSearch = () => {
         </CardContent>
       </Card>
 
-      {/* Categories */}
       <Card sx={{ mb: 3, borderRadius: 3, boxShadow: 2 }}>
         <CardContent>
           <Box display="flex" alignItems="center" gap={1} mb={1}>

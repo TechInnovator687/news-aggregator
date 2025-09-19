@@ -6,7 +6,7 @@ import {
   Chip,
   Button,
 } from "@mui/material";
-import { Label, Category, ArrowBack } from "@mui/icons-material";
+import { Label, ArrowBack } from "@mui/icons-material";
 import { Source, NewsCategory } from "../../types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -113,7 +113,7 @@ const Preference = () => {
           startIcon={<Label />}
           onClick={() => {
             onApplyFilters();
-            navigate("/"); // redirect after applying filters
+            navigate("/");
           }}
         >
           Save Preferences
