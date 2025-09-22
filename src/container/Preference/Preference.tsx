@@ -27,7 +27,7 @@ const categories: { label: string; value: NewsCategory }[] = [
   { label: "World", value: NewsCategory.global },
 ];
 
-const Preference = () => {
+export const Preference = () => {
   const { filters, setFilters, onApplyFilters } = useNews();
   const navigate = useNavigate();
 
@@ -122,5 +122,3 @@ const Preference = () => {
     </Box>
   );
 };
-
-export default Preference;

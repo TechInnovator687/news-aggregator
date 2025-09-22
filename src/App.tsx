@@ -1,9 +1,9 @@
-import SidePanel from "@components/SidePanel/SidePanel";
 import { News } from "@container/News";
-import Preference from "@container/Preference/Preference";
-import Search from "@container/Search/Search";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { NewsProvider } from "./context/NewsContext";
+import { SidePanel } from "@components/SidePanel";
+import { FilterSearch } from "@container/Search";
+import { Preference } from "@container/Preference";
 
 const App = () => {
   return (
@@ -12,7 +12,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<SidePanel />}>
             <Route index element={<News />} />
-            <Route path="/search" element={<Search />} />
+            <Route path="/search" element={<FilterSearch />} />
             <Route path="/preferences" element={<Preference />} />
           </Route>
         </Routes>

@@ -16,7 +16,7 @@ import { useNews } from "@/context/NewsContext";
 
 const drawerWidth = 260;
 
-const SidePanel = () => {
+export const SidePanel = () => {
   const location = useLocation();
   const { news, loading } = useNews();
   const menuItems = [
@@ -258,5 +258,3 @@ const SidePanel = () => {
     </Box>
   );
 };
-
-export default SidePanel;

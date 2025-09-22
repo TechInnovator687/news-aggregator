@@ -28,7 +28,7 @@ const categories: { label: string; value: NewsCategory }[] = [
   { label: "World", value: NewsCategory.global },
 ];
 
-const FilterSearch = () => {
+export const FilterSearch = () => {
   const { filters, setFilters, onApplyFilters } = useNews();
   const [keywords, setKeywords] = useState(filters.keyword || "");
   const [selectedSource, setSelectedSource] = useState<Source | null>(
@@ -144,5 +144,3 @@ const FilterSearch = () => {
     </Box>
   );
 };
-
-export default FilterSearch;
