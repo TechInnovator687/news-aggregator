@@ -142,6 +142,7 @@ export const styles = {
     borderRadius: 2,
     textTransform: "none",
     fontWeight: 600,
+    color: " white",
     bgcolor: "#1976d2",
     "&:hover": { bgcolor: "#0d47a1", transform: "scale(1.02)" },
   },
