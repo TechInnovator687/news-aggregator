@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useNews } from "@/context/NewsContext";
 import { categories, newsSources } from "@utils/constants";
+import { preferenceStyles as styles } from "./styles";
 
 export const Preference = () => {
   const { filters, setFilters, onApplyFilters } = useNews();
@@ -37,20 +38,20 @@ export const Preference = () => {
   };
 
   return (
-    <Box sx={{ p: 4, bgcolor: "#f9fafb", minHeight: "100vh" }}>
-      <Typography variant="h4" fontWeight="bold" gutterBottom>
+    <Box sx={styles.container}>
+      <Typography variant="h4" sx={styles.title} gutterBottom>
         Personalize Your Feed
       </Typography>
-      <Typography variant="body1" color="text.secondary" mb={3}>
+      <Typography variant="body1" sx={styles.subtitle}>
         Tailor your news experience. Select your favorite source and category.
       </Typography>
 
-      <Card sx={{ mb: 3, borderRadius: 3, boxShadow: 2 }}>
+      <Card sx={styles.card}>
         <CardContent>
-          <Typography variant="h6" fontWeight="bold" mb={1}>
+          <Typography variant="h6" sx={styles.title}>
             Preferred News Source
           </Typography>
-          <Box display="flex" flexWrap="wrap" gap={1}>
+          <Box sx={styles.chipContainer}>
             {newsSources.map(({ label, value }) => (
               <Chip
                 key={value}
@@ -65,12 +66,12 @@ export const Preference = () => {
         </CardContent>
       </Card>
 
-      <Card sx={{ mb: 3, borderRadius: 3, boxShadow: 2 }}>
+      <Card sx={styles.card}>
         <CardContent>
-          <Typography variant="h6" fontWeight="bold" mb={1}>
+          <Typography variant="h6" sx={styles.title}>
             Preferred Category
           </Typography>
-          <Box display="flex" flexWrap="wrap" gap={1}>
+          <Box sx={styles.chipContainer}>
             {categories.map(({ label, value }) => (
               <Chip
                 key={value}
@@ -85,7 +86,7 @@ export const Preference = () => {
         </CardContent>
       </Card>
 
-      <Box display="flex" justifyContent="space-between" mt={3}>
+      <Box sx={styles.actionBox}>
         <Button
           variant="outlined"
           startIcon={<ArrowBack />}

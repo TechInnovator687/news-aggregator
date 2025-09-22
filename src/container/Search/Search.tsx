@@ -13,6 +13,7 @@ import { Source, NewsCategory } from "../../types";
 import { useNews } from "@/context/NewsContext";
 import { useNavigate } from "react-router-dom";
 import { categories, newsSources } from "@utils/constants";
+import { filterSearchStyles as styles } from "./styles";
 
 export const FilterSearch = () => {
   const { filters, setFilters, onApplyFilters } = useNews();
@@ -44,19 +45,19 @@ export const FilterSearch = () => {
   };
 
   return (
-    <Box sx={{ p: 4, bgcolor: "#f9fafb", minHeight: "100vh" }}>
-      <Typography variant="h4" fontWeight="bold" gutterBottom>
+    <Box sx={styles.container}>
+      <Typography variant="h4" sx={styles.title} gutterBottom>
         Filter & Search
       </Typography>
-      <Typography variant="body1" color="text.secondary" mb={3}>
+      <Typography variant="body1" sx={styles.subtitle}>
         Refine your search to find exactly what you're looking for.
       </Typography>
 
-      <Card sx={{ mb: 3, borderRadius: 3, boxShadow: 2 }}>
+      <Card sx={styles.card}>
         <CardContent>
-          <Box display="flex" alignItems="center" gap={1} mb={1}>
+          <Box sx={styles.sectionHeader}>
             <FilterAlt color="primary" />
-            <Typography variant="h6" fontWeight="bold">
+            <Typography variant="h6" sx={styles.title}>
               Keywords
             </Typography>
           </Box>
@@ -70,15 +71,15 @@ export const FilterSearch = () => {
         </CardContent>
       </Card>
 
-      <Card sx={{ mb: 3, borderRadius: 3, boxShadow: 2 }}>
+      <Card sx={styles.card}>
         <CardContent>
-          <Box display="flex" alignItems="center" gap={1} mb={1}>
+          <Box sx={styles.sectionHeader}>
             <Label color="primary" />
-            <Typography variant="h6" fontWeight="bold">
+            <Typography variant="h6" sx={styles.title}>
               Sources
             </Typography>
           </Box>
-          <Box display="flex" flexWrap="wrap" gap={1}>
+          <Box sx={styles.chipContainer}>
             {newsSources.map(({ label, value }) => (
               <Chip
                 key={value}
@@ -93,15 +94,15 @@ export const FilterSearch = () => {
         </CardContent>
       </Card>
 
-      <Card sx={{ mb: 3, borderRadius: 3, boxShadow: 2 }}>
+      <Card sx={styles.card}>
         <CardContent>
-          <Box display="flex" alignItems="center" gap={1} mb={1}>
+          <Box sx={styles.sectionHeader}>
             <Category color="primary" />
-            <Typography variant="h6" fontWeight="bold">
+            <Typography variant="h6" sx={styles.title}>
               Categories
             </Typography>
           </Box>
-          <Box display="flex" flexWrap="wrap" gap={1}>
+          <Box sx={styles.chipContainer}>
             {categories.map(({ label, value }) => (
               <Chip
                 key={value}
@@ -116,12 +117,12 @@ export const FilterSearch = () => {
         </CardContent>
       </Card>
 
-      <Box display="flex" justifyContent="flex-end" mt={3}>
+      <Box sx={styles.actionBox}>
         <Button
           variant="contained"
           color="primary"
           startIcon={<Search />}
-          sx={{ borderRadius: 2 }}
+          sx={styles.button}
           onClick={handleSearch}
         >
           Search
