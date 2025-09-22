@@ -10,9 +10,9 @@ import { Label, ArrowBack } from "@mui/icons-material";
 import { Source, NewsCategory } from "../../types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useNews } from "@/context/NewsContext";
 import { categories, newsSources } from "@utils/constants";
 import { preferenceStyles as styles } from "./styles";
+import { useNews } from "@/context";
 
 export const Preference = () => {
   const { filters, setFilters, onApplyFilters } = useNews();

@@ -10,10 +10,10 @@ import {
 import { Search, FilterAlt, Label, Category } from "@mui/icons-material";
 import { useState } from "react";
 import { Source, NewsCategory } from "../../types";
-import { useNews } from "@/context/NewsContext";
 import { useNavigate } from "react-router-dom";
 import { categories, newsSources } from "@utils/constants";
 import { filterSearchStyles as styles } from "./styles";
+import { useNews } from "@/context";
 
 export const FilterSearch = () => {
   const { filters, setFilters, onApplyFilters } = useNews();

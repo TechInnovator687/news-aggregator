@@ -1,8 +1,8 @@
 import { Box, CircularProgress, Container, Typography } from "@mui/material";
 import { NewsCard } from "@components/NewsCard";
 import styles from "./styles";
-import { useNews } from "@/context/NewsContext";
 import { FeaturedNewsCard } from "@components/FeaturedNewsCard";
+import { useNews } from "@/context";
 
 export const News = () => {
   const { news, loading } = useNews();

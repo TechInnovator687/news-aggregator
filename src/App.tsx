@@ -1,9 +1,9 @@
 import { News } from "@container/News";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { NewsProvider } from "./context/NewsContext";
 import { SidePanel } from "@components/Sidebar";
 import { FilterSearch } from "@container/Search";
 import { Preference } from "@container/Preference";
+import { NewsProvider } from "./context";
 
 const App = () => {
   return (
