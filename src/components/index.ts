@@ -1,4 +1,4 @@
 export { NewsCard } from "./NewsCard";
 export { SelectableChip } from "./SelectableChip";
-export { SidePanel } from "./SidePanel";
+export { SidePanel } from "./Sidebar";
 export { FeaturedNewsCard } from "./FeaturedNewsCard";
