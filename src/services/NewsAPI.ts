@@ -17,6 +17,9 @@ interface NewsAPIArticle {
   title: string;
   publishedAt: Date;
   source: { name?: string };
+  urlToImage: string;
+  description: string;
+  author: string;
 }
 
 interface NewsAPIResponse {
@@ -52,10 +55,14 @@ class NewsAPI extends NewsService<NewsAPIResponse> {
   }
 
   protected normalizeResponse(data: NewsAPIResponse): NewsItem[] {
+    console.log(data, "data");
     return (
       data.articles?.map((item: NewsAPIArticle) => ({
         url: item.url ?? "",
         title: item.title ?? "",
+        description: item.description,
+        author: item.author ?? "",
+        imgUrl: item.urlToImage,
         date: item.publishedAt ?? "",
         category: item.source.name ?? "",
         source: "All News",

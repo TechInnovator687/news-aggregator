@@ -16,7 +16,6 @@ export const News = () => {
             source={featuredNews?.source || ""}
             title={featuredNews?.title || ""}
             category={featuredNews?.category || ""}
-            author={"author"}
             date={featuredNews?.date || ""}
             readTime={"1 min"}
             articleUrl={featuredNews?.url || ""}

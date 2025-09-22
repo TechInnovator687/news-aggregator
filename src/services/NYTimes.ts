@@ -8,6 +8,15 @@ interface NYTimesArticle {
   headline: { main?: string };
   pub_date: Date;
   section_name: string;
+  snippet: string;
+  multimedia: {
+    default: {
+      url: string;
+    };
+  };
+  byline: {
+    original: string;
+  };
 }
 
 interface NYTimesResponse {
@@ -58,8 +67,11 @@ class NYTimesService extends NewsService<NYTimesResponse> {
       data.response?.docs.map((item: NYTimesArticle) => ({
         url: item.web_url ?? "",
         title: item.headline.main ?? "",
+        description: item.snippet ?? "",
         date: item.pub_date,
         category: item.section_name ?? "",
+        imgUrl: item.multimedia.default.url,
+        author: item.byline.original,
         source: "NY Time",
         Sourcekey: Source.nytime,
       })) ?? []

@@ -8,4 +8,6 @@ export type NewsCardProps = {
   category: string;
   url: string;
   Sourcekey: Source;
+  description?: string;
+  imgUrl?: string;
 };

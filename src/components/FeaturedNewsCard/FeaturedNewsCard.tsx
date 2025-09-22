@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Box,
   Card,
@@ -27,24 +26,24 @@ export interface FeaturedNewsCardProps {
   title: string;
   description?: string;
   category: string;
-  author: string;
+  author?: string;
   date: Date | string;
   readTime: string;
   articleUrl: string;
   shareUrl?: string;
 }
 
-export const FeaturedNewsCard: React.FC<FeaturedNewsCardProps> = ({
+export const FeaturedNewsCard = ({
   image = "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
   source,
   title,
   description = "",
   category,
-  author,
+  author = "David Martinez",
   date,
   readTime,
   articleUrl,
-}) => {
+}: FeaturedNewsCardProps) => {
   const navigate = useNavigate();
   const sourceColor = {
     bg: "#ECEFF1",
@@ -161,14 +160,15 @@ export const FeaturedNewsCard: React.FC<FeaturedNewsCardProps> = ({
             {title}
           </Typography>
 
-          {description && (
-            <Typography
-              variant="body1"
-              sx={{ mb: 3, color: "text.secondary", flexGrow: 1 }}
-            >
-              {description}
-            </Typography>
-          )}
+          {description ||
+            (title && (
+              <Typography
+                variant="body1"
+                sx={{ mb: 3, color: "text.secondary", flexGrow: 1 }}
+              >
+                {description || title}
+              </Typography>
+            ))}
 
           <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 3 }}>
             <Stack direction="row" spacing={1} alignItems="center">

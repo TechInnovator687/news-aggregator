@@ -33,12 +33,14 @@ const sourceChipColors: Record<
 };
 
 export const NewsCard = ({
-  title = "Stock Markets Rally as Inflation Shows Signs of Cooling",
+  title,
   date = new Date(),
-  source = "NY Times",
+  source,
   category = "Business",
   readTime = "1 min",
   author = "David Martinez",
+  description,
+  imgUrl = "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
   ...otherProps
 }: NewsCardProps & { readTime?: string; author?: string }) => {
   const cardColor = getRandomColor();
@@ -47,7 +49,7 @@ export const NewsCard = ({
     border: "#607D8B",
     hoverBg: "#CFD8DC",
   };
-
+  console.log({ otherProps, source }, "klk");
   return (
     <Card
       sx={{
@@ -72,12 +74,7 @@ export const NewsCard = ({
       onClick={() => otherProps.url && window.open(otherProps.url, "_blank")}
     >
       <Box sx={{ position: "relative" }}>
-        <CardMedia
-          component="img"
-          height="180"
-          image="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-          alt={title}
-        />
+        <CardMedia component="img" height="180" image={imgUrl} alt={title} />
         <Chip
           label={source}
           size="small"
@@ -159,8 +156,8 @@ export const NewsCard = ({
             transition: "color 0.3s ease",
           }}
         >
-          Markets celebrate cooling inflation with significant gains across
-          major indices as investors anticipate...
+          {description ||
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis amet, quod laboriosam neque a obcaecati?"}
         </Typography>
       </CardContent>
       <CardActions
