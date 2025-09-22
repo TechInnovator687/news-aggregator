@@ -6,23 +6,25 @@ import { FeaturedNewsCard } from "@components/FeaturedNewsCard/FeaturedNewsCard"
 
 export const News = () => {
   const { news, loading } = useNews();
+  const [featuredNews, ...newsList] = news || [];
+  console.log(featuredNews, "featuredNews");
 
   return (
     <Box sx={styles.root}>
       <Container maxWidth={false} sx={styles.newsContainer}>
         <Box>
           <FeaturedNewsCard
-            source={""}
-            title={""}
-            category={""}
-            author={""}
-            date={""}
-            readTime={""}
-            articleUrl={""}
+            source={featuredNews?.source || ""}
+            title={featuredNews?.title || ""}
+            category={featuredNews?.category || ""}
+            author={"author"}
+            date={featuredNews?.date || ""}
+            readTime={"1 min"}
+            articleUrl={featuredNews?.url || ""}
           />
         </Box>
         <Box sx={styles.newsList}>
-          {news?.map((newsItem) => (
+          {newsList?.map((newsItem) => (
             <Box key={newsItem?.title} sx={styles.newsCard}>
               <NewsCard {...newsItem} />
             </Box>

@@ -18,6 +18,7 @@ import {
   Settings,
 } from "@mui/icons-material";
 import { formatDistanceToNow } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 export interface FeaturedNewsCardProps {
   image?: string;
@@ -33,7 +34,7 @@ export interface FeaturedNewsCardProps {
 }
 
 export const FeaturedNewsCard: React.FC<FeaturedNewsCardProps> = ({
-  image = "https://images.unsplash.com/photo-1633026596327-905c0bcff61e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+  image = "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
   source,
   title,
   description = "",
@@ -42,8 +43,13 @@ export const FeaturedNewsCard: React.FC<FeaturedNewsCardProps> = ({
   date,
   readTime,
   articleUrl,
-  shareUrl,
 }) => {
+  const navigate = useNavigate();
+  const sourceColor = {
+    bg: "#ECEFF1",
+    border: "#607D8B",
+    hoverBg: "#CFD8DC",
+  };
   return (
     <Box
       sx={{
@@ -54,7 +60,6 @@ export const FeaturedNewsCard: React.FC<FeaturedNewsCardProps> = ({
         mt: 5,
       }}
     >
-      {/* Top Action Buttons */}
       <Stack
         direction="row"
         spacing={2}
@@ -64,6 +69,7 @@ export const FeaturedNewsCard: React.FC<FeaturedNewsCardProps> = ({
           variant="outlined"
           startIcon={<Refresh />}
           sx={{ textTransform: "none", borderRadius: 2 }}
+          onClick={() => window.location.reload()}
         >
           Refresh Feed
         </Button>
@@ -71,6 +77,7 @@ export const FeaturedNewsCard: React.FC<FeaturedNewsCardProps> = ({
           variant="outlined"
           startIcon={<Settings />}
           sx={{ textTransform: "none", borderRadius: 2 }}
+          onClick={() => navigate("/preferences")}
         >
           Preferences
         </Button>
@@ -89,7 +96,6 @@ export const FeaturedNewsCard: React.FC<FeaturedNewsCardProps> = ({
           },
         }}
       >
-        {/* Left Section: Image */}
         <Box sx={{ position: "relative", width: "50%", flexShrink: 0 }}>
           <CardMedia
             component="img"
@@ -100,7 +106,6 @@ export const FeaturedNewsCard: React.FC<FeaturedNewsCardProps> = ({
               objectFit: "cover",
             }}
           />
-          {/* Source chip */}
           <Chip
             label={source}
             size="small"
@@ -111,25 +116,24 @@ export const FeaturedNewsCard: React.FC<FeaturedNewsCardProps> = ({
               fontWeight: 600,
               borderRadius: "12px",
               px: 1,
-              ...(source.toLowerCase() === "guardian"
-                ? {
-                    bgcolor: "rgba(25, 118, 210, 0.1)", // soft shadowy blue tint
-                    color: "#1976d2",
-                    border: "1px solid rgba(25, 118, 210, 0.3)",
-                  }
-                : {
-                    bgcolor: "#1976d2",
-                    color: "white",
-                  }),
+              bgcolor: sourceColor.bg,
+              color: sourceColor.border,
+              transition: "all 0.3s ease",
+              "&:hover": {
+                bgcolor: sourceColor.hoverBg,
+              },
             }}
           />
         </Box>
 
-        {/* Right Section: Content */}
         <Box
-          sx={{ p: 4, width: "50%", display: "flex", flexDirection: "column" }}
+          sx={{
+            p: 4,
+            width: "50%",
+            display: "flex",
+            flexDirection: "column",
+          }}
         >
-          {/* Category Chip */}
           <Chip
             label={category}
             size="small"
@@ -143,7 +147,6 @@ export const FeaturedNewsCard: React.FC<FeaturedNewsCardProps> = ({
             }}
           />
 
-          {/* Title */}
           <Typography
             variant="h5"
             component="h2"
@@ -157,17 +160,15 @@ export const FeaturedNewsCard: React.FC<FeaturedNewsCardProps> = ({
             {title}
           </Typography>
 
-          {/* Description */}
           {description && (
             <Typography
               variant="body1"
-              sx={{ mb: 3, flexGrow: 1, color: "text.secondary" }}
+              sx={{ mb: 3, color: "text.secondary", flexGrow: 1 }}
             >
               {description}
             </Typography>
           )}
 
-          {/* Author, Date, Read Time */}
           <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 3 }}>
             <Stack direction="row" spacing={1} alignItems="center">
               <Avatar sx={{ width: 26, height: 26, fontSize: 12 }}>
@@ -177,9 +178,18 @@ export const FeaturedNewsCard: React.FC<FeaturedNewsCardProps> = ({
                 {author}
               </Typography>
             </Stack>
-            <Typography variant="body2" color="text.secondary">
-              {/* • {formatDistanceToNow(new Date(date), { addSuffix: true })} */}
-            </Typography>
+            <Stack
+              direction="row"
+              spacing={0.5}
+              justifyContent="center"
+              alignItems="center"
+            >
+              <AccessTime sx={{ fontSize: 16, color: "text.secondary" }} />
+              <Typography variant="body2" color="text.secondary">
+                {date &&
+                  formatDistanceToNow(new Date(date), { addSuffix: true })}
+              </Typography>
+            </Stack>
             <Stack direction="row" spacing={0.5} alignItems="center">
               <AccessTime sx={{ fontSize: 16, color: "text.secondary" }} />
               <Typography variant="body2" color="text.secondary">
@@ -188,8 +198,12 @@ export const FeaturedNewsCard: React.FC<FeaturedNewsCardProps> = ({
             </Stack>
           </Stack>
 
-          {/* Action Buttons */}
-          <Stack direction="row" spacing={2} alignItems="center">
+          <Stack
+            direction="row"
+            spacing={2}
+            alignItems="center"
+            sx={{ mt: "auto" }}
+          >
             <Button
               variant="contained"
               startIcon={<Visibility />}
@@ -222,7 +236,7 @@ export const FeaturedNewsCard: React.FC<FeaturedNewsCardProps> = ({
                   transform: "scale(1.1)",
                 },
               }}
-              onClick={() => shareUrl && window.open(shareUrl, "_blank")}
+              onClick={() => articleUrl && window.open(articleUrl, "_blank")}
             >
               <Share />
             </IconButton>
