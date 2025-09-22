@@ -68,14 +68,16 @@ const SidePanel = () => {
               </Typography>
             </Box>
           </Box>
+          <Divider />
 
-          <Box sx={{ px: 2, mt: 1 }}>
+          <Box sx={{ px: 2, mt: 3.5 }}>
             <Typography
               variant="caption"
               sx={{
                 fontWeight: "bold",
                 color: "text.secondary",
                 letterSpacing: 0.5,
+                pl: 2.5,
               }}
             >
               MAIN MENU
@@ -89,21 +91,30 @@ const SidePanel = () => {
                     component={Link}
                     to={item.path}
                     sx={{
-                      borderRadius: "30px",
+                      borderRadius: "12px",
                       my: 1,
                       px: 2,
-                      py: 1,
+                      py: 0.5,
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
-                      bgcolor: active ? "primary.main" : "grey.100",
+                      bgcolor: active ? "primary.main" : "white",
                       color: active ? "#fff" : "text.primary",
                       fontWeight: active ? "bold" : "normal",
                       boxShadow: active
                         ? "0px 4px 10px rgba(0,0,0,0.15)"
                         : "none",
+                      transition: "all 0.2s ease-in-out",
                       "&:hover": {
-                        bgcolor: active ? "primary.dark" : "grey.200",
+                        bgcolor: active ? "white" : "#f4f6f8",
+                        color: "black",
+                        boxShadow: active
+                          ? "0px 4px 12px rgba(0,0,0,0.25)"
+                          : "0px 2px 6px rgba(0,0,0,0.08)",
+                        transform: "translateY(-2px)",
+                      },
+                      "&:hover .MuiListItemIcon-root": {
+                        color: "black",
                       },
                     }}
                   >
@@ -125,6 +136,7 @@ const SidePanel = () => {
                         height: 10,
                         borderRadius: "50%",
                         bgcolor: active ? "primary.light" : "transparent",
+                        transition: "all 0.2s ease-in-out",
                       }}
                     />
                   </ListItemButton>
@@ -133,7 +145,7 @@ const SidePanel = () => {
             </List>
           </Box>
 
-          <Box sx={{ px: 2, mt: 2 }}>
+          <Box sx={{ px: 4, mt: 2 }}>
             <Typography
               variant="caption"
               sx={{
@@ -144,8 +156,19 @@ const SidePanel = () => {
             >
               QUICK STATS
             </Typography>
-            <Typography variant="body2" sx={{ mt: 0.5 }}>
-              Today&apos;s Articles{" "}
+            <Typography
+              variant="body2"
+              sx={{
+                mt: 2,
+                mb: 1,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography variant="body2" color="text.secondary">
+                Today&apos;s Articles
+              </Typography>
               <Typography
                 component="span"
                 fontWeight="bold"
@@ -154,16 +177,28 @@ const SidePanel = () => {
                 {loading ? <CircularProgress size={15} /> : news.length}
               </Typography>
             </Typography>
-            <Typography variant="body2">
-              Sources Active{" "}
+            <Typography
+              variant="body2"
+              sx={{
+                mb: 1,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography variant="body2" color="text.secondary">
+                Sources Active
+              </Typography>
               <Typography component="span" fontWeight="bold" color="primary">
                 3
               </Typography>
             </Typography>
+            <Divider />
+
             <Typography
               variant="caption"
               color="text.secondary"
-              sx={{ mt: 1, display: "block" }}
+              sx={{ mt: 2, display: "block" }}
             >
               Last updated: Just now
             </Typography>
@@ -172,15 +207,41 @@ const SidePanel = () => {
           <Box sx={{ flexGrow: 1 }} />
 
           <Divider />
-          <Box sx={{ p: 2, display: "flex", alignItems: "center", gap: 1 }}>
-            <Avatar sx={{ width: 32, height: 32, bgcolor: "grey.200" }}>
-              N
+          <Box
+            sx={{
+              p: 2,
+              display: "flex",
+              alignItems: "center",
+              gap: 1.5,
+              bgcolor: "transparent",
+              cursor: "pointer",
+              "&:hover": {
+                bgcolor: "#f5f7fa",
+                borderRadius: 2,
+              },
+            }}
+          >
+            <Avatar
+              sx={{
+                width: 36,
+                height: 36,
+                bgcolor: "grey.100",
+                color: "text.secondary",
+              }}
+            >
+              <Home fontSize="small" />
             </Avatar>
             <Box>
-              <Typography variant="body2" sx={{ fontWeight: "bold" }}>
+              <Typography
+                variant="body2"
+                sx={{ fontWeight: 600, color: "text.primary" }}
+              >
                 News Reader
               </Typography>
-              <Typography variant="caption" color="text.secondary">
+              <Typography
+                variant="caption"
+                sx={{ color: "text.secondary", fontWeight: 400 }}
+              >
                 Welcome back!
               </Typography>
             </Box>
