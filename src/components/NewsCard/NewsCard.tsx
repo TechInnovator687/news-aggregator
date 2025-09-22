@@ -64,12 +64,19 @@ export const NewsCard = ({
         flexDirection: "column",
         transition:
           "transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease-in-out",
+
+        ["@media (max-width:768px)"]: {
+          maxWidth: "100%",
+          width: "100%",
+          minHeight: "unset",
+          maxHeight: "unset",
+          borderRadius: 2,
+        },
+
         "&:hover": {
           transform: "translateY(-6px) scale(1.02)",
           boxShadow: "0 16px 40px rgba(0,0,0,0.15)",
-          ".news-card-title": {
-            color: "#0d47a1",
-          },
+          ".news-card-title": { color: "#0d47a1" },
         },
       }}
       onClick={() => otherProps.url && window.open(otherProps.url, "_blank")}

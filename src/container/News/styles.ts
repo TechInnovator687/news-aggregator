@@ -29,7 +29,6 @@ const styles = {
 
   newsCard: {
     width: "100%",
-    maxWidth: 380,
     minHeight: 456,
     boxSizing: "border-box",
   },
