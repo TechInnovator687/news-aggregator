@@ -19,6 +19,7 @@ import {
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { getRelativeTime } from "@utils/dateUtils";
+import { styles } from "./style";
 
 export interface FeaturedNewsCardProps {
   image?: string;
@@ -48,73 +49,30 @@ export const FeaturedNewsCard = ({
   const sourceColor = { bg: "#ECEFF1", border: "#607D8B", hoverBg: "#CFD8DC" };
 
   return (
-    <Box
-      sx={{
-        position: "relative",
-        width: "100%",
-        maxWidth: 1200,
-        mx: "auto",
-        mt: 0,
-      }}
-    >
-      <Box sx={{ position: "relative", mb: 3 }}>
+    <Box sx={styles.container}>
+      <Box sx={styles.headerWrapper}>
         <Stack
           direction={{ xs: "column", sm: "row" }}
           alignItems={{ xs: "flex-start", sm: "center" }}
           justifyContent="space-between"
           spacing={{ xs: 2, sm: 0 }}
-          sx={{ width: "100%" }}
+          sx={styles.headerStack}
         >
-          <Typography
-            variant="h4"
-            fontWeight={700}
-            sx={{ fontSize: { xs: "1.5rem", sm: "2.125rem" } }}
-          >
+          <Typography variant="h4" sx={styles.headerTitle}>
             Top Stories
           </Typography>
 
-          <Stack
-            direction="row"
-            spacing={2}
-            sx={{ width: { xs: "100%", sm: "auto" } }}
-          >
+          <Stack direction="row" spacing={2} sx={styles.headerButtonStack}>
             <Button
-              fullWidth
-              variant="outlined"
+              sx={styles.actionButton}
               startIcon={<Refresh />}
-              sx={{
-                textTransform: "none",
-                borderRadius: 2,
-                color: "black",
-                borderColor: "black",
-                "&:hover": {
-                  color: "white",
-                  backgroundColor: "primary.main",
-                  borderColor: "primary.main",
-                },
-                "& .MuiSvgIcon-root": { color: "inherit" },
-              }}
               onClick={() => window.location.reload()}
             >
               Refresh Feed
             </Button>
-
             <Button
-              fullWidth
-              variant="outlined"
+              sx={styles.actionButton}
               startIcon={<Settings />}
-              sx={{
-                textTransform: "none",
-                borderRadius: 2,
-                color: "black",
-                borderColor: "black",
-                "&:hover": {
-                  color: "white",
-                  backgroundColor: "primary.main",
-                  borderColor: "primary.main",
-                },
-                "& .MuiSvgIcon-root": { color: "inherit" },
-              }}
               onClick={() => navigate("/preferences")}
             >
               Preferences
@@ -123,148 +81,48 @@ export const FeaturedNewsCard = ({
         </Stack>
       </Box>
 
-      <Card
-        sx={{
-          display: "flex",
-          borderRadius: 3,
-          overflow: "hidden",
-          boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-          transition: "all 0.3s ease-in-out",
-          "&:hover": {
-            transform: "translateY(-6px) scale(1.01)",
-            boxShadow: "0 12px 35px rgba(0,0,0,0.15)",
-          },
-          ["@media (max-width:768px)"]: { flexDirection: "column" },
-          ["@media (min-width:769px)"]: { flexDirection: "row" },
-        }}
-      >
-        <Box
-          sx={{
-            position: "relative",
-            width: "50%",
-            flexShrink: 1,
-            minWidth: 0,
-            zIndex: 0,
-            ["@media (max-width:768px)"]: {
-              width: "100%",
-              aspectRatio: "16 / 9",
-            },
-          }}
-        >
+      <Card sx={styles.card}>
+        <Box sx={styles.imageWrapper}>
           <CardMedia
             component="img"
             image={image}
             alt={title}
-            sx={{
-              height: "100%",
-              width: "100%",
-              objectFit: "cover",
-              display: "block",
-            }}
+            sx={styles.cardMedia}
           />
           <Chip
             label={source}
             size="small"
             sx={{
-              position: "absolute",
-              bottom: 16,
-              left: 16,
-              fontWeight: 600,
-              borderRadius: "12px",
-              px: 1,
+              ...styles.sourceChip,
               bgcolor: sourceColor.bg,
               color: sourceColor.border,
-              transition: "all 0.3s ease",
               "&:hover": { bgcolor: sourceColor.hoverBg },
             }}
           />
         </Box>
 
-        <Box
-          sx={{
-            position: "relative",
-            zIndex: 1,
-            p: 4,
-            width: "50%",
-            flexShrink: 1,
-            minWidth: 0,
-            display: "flex",
-            flexDirection: "column",
-            ["@media (max-width:768px)"]: { width: "100%", p: 2.5 },
-          }}
-        >
-          <Chip
-            label={category}
-            size="small"
-            sx={{
-              bgcolor: "#e8f2fd",
-              color: "#1976d2",
-              fontWeight: 600,
-              mb: 2,
-              alignSelf: "flex-start",
-              borderRadius: "12px",
-            }}
-          />
-
-          <Typography
-            variant="h5"
-            component="h2"
-            sx={{
-              fontWeight: 800,
-              mb: 1.5,
-              color: "#0a2540",
-              lineHeight: 1.3,
-              fontSize: { xs: "1.125rem", md: "1.5rem" },
-              overflowWrap: "anywhere",
-              ["@media (max-width:768px)"]: { mr: 4 },
-            }}
-          >
-            {title}
-          </Typography>
-
-          {(description || title) && (
-            <Typography
-              variant="body1"
-              sx={{
-                mb: 3,
-                color: "text.secondary",
-                flexGrow: 1,
-                fontSize: { xs: "0.95rem", md: "1rem" },
-                overflowWrap: "anywhere",
-                ["@media (max-width:768px)"]: { mr: 4 },
-              }}
-            >
-              {description || title}
-            </Typography>
+        <Box sx={styles.contentBox}>
+          <Chip label={category} size="small" sx={styles.categoryChip} />
+          <Typography sx={styles.title}>{title}</Typography>
+          {description && (
+            <Typography sx={styles.description}>{description}</Typography>
           )}
 
-          <Stack
-            direction="row"
-            spacing={2}
-            alignItems="center"
-            sx={{
-              mb: 3,
-              ["@media (max-width:768px)"]: {
-                flexDirection: "column",
-                alignItems: "flex-start",
-                gap: 1.5,
-              },
-            }}
-          >
+          <Stack direction="row" spacing={2} sx={styles.infoStack}>
             <Stack direction="row" spacing={1} alignItems="center">
-              <Avatar sx={{ width: 26, height: 26, fontSize: 12 }}>
-                {author?.[0] || "?"}
-              </Avatar>
+              <Avatar sx={styles.authorAvatar}>{author?.[0]}</Avatar>
               <Typography variant="body2" color="text.secondary">
                 {author}
               </Typography>
             </Stack>
+
             <Stack direction="row" spacing={0.5} alignItems="center">
               <AccessTime sx={{ fontSize: 16, color: "text.secondary" }} />
               <Typography variant="body2" color="text.secondary">
-                {date && getRelativeTime(date)}
+                {getRelativeTime(date)}
               </Typography>
             </Stack>
+
             <Stack direction="row" spacing={0.5} alignItems="center">
               <MenuBook sx={{ fontSize: 16, color: "text.secondary" }} />
               <Typography variant="body2" color="text.secondary">
@@ -273,40 +131,16 @@ export const FeaturedNewsCard = ({
             </Stack>
           </Stack>
 
-          <Stack
-            direction="row"
-            spacing={2}
-            alignItems="stretch"
-            sx={{
-              mt: "auto",
-              ["@media (max-width:768px)"]: { flexDirection: "column", mr: 5 },
-            }}
-          >
+          <Stack direction="row" spacing={2} sx={styles.cardButtonStack}>
             <Button
-              variant="contained"
+              sx={styles.readButton}
               startIcon={<Visibility />}
-              sx={{
-                flexGrow: 1,
-                py: { xs: 1, md: 1.2 },
-                borderRadius: 2,
-                textTransform: "none",
-                fontWeight: 600,
-                bgcolor: "#1976d2",
-                "&:hover": { bgcolor: "#0d47a1", transform: "scale(1.02)" },
-              }}
               onClick={() => window.open(articleUrl, "_blank")}
             >
               Read Article
             </Button>
             <IconButton
-              sx={{
-                border: "1px solid #e0e0e0",
-                borderRadius: 2,
-                p: 1.2,
-                color: "text.secondary",
-                "&:hover": { bgcolor: "#f5f5f5", transform: "scale(1.1)" },
-                ["@media (max-width:768px)"]: { display: "none" },
-              }}
+              sx={styles.shareButton}
               onClick={() => articleUrl && window.open(articleUrl, "_blank")}
             >
               <Share />
