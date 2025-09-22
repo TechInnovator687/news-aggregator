@@ -10,7 +10,7 @@ import {
   Avatar,
   Stack,
 } from "@mui/material";
-import { AccessTime } from "@mui/icons-material";
+import { AccessTime, MenuBook } from "@mui/icons-material";
 import { formatDistanceToNow } from "date-fns";
 import type { NewsCardProps } from "./types";
 
@@ -96,7 +96,7 @@ export const NewsCard = ({
           }}
         />
         <Chip
-          icon={<AccessTime sx={{ fontSize: 16, color: "black" }} />}
+          icon={<MenuBook />}
           label={readTime}
           size="small"
           className="readtime-chip"
@@ -190,23 +190,27 @@ export const NewsCard = ({
             </Typography>
           </Stack>
         </Stack>
-        <Button
-          variant="outlined"
-          fullWidth
-          className="readmore-button"
-          sx={{
-            borderRadius: 2,
-            textTransform: "none",
-            fontWeight: 600,
-            transition: "all 0.3s ease",
-            "&:hover": {
-              bgcolor: "rgba(0,0,0,0.08)",
-            },
-          }}
-        >
-          Read More
-        </Button>
       </CardActions>
+      <Button
+        variant="outlined"
+        fullWidth
+        className="readmore-button"
+        sx={{
+          ml: 2,
+          mr: 2,
+          width: "auto",
+          borderRadius: 2,
+          mb: 2,
+          textTransform: "none",
+          fontWeight: 600,
+          transition: "all 0.3s ease",
+          "&:hover": {
+            bgcolor: "rgba(0,0,0,0.08)",
+          },
+        }}
+      >
+        Read More
+      </Button>
     </Card>
   );
 };

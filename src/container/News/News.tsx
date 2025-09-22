@@ -7,7 +7,6 @@ import { FeaturedNewsCard } from "@components/FeaturedNewsCard/FeaturedNewsCard"
 export const News = () => {
   const { news, loading } = useNews();
   const [featuredNews, ...newsList] = news || [];
-  console.log(featuredNews, "featuredNews");
 
   return (
     <Box sx={styles.root}>

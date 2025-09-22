@@ -16,6 +16,7 @@ import {
   Visibility,
   Refresh,
   Settings,
+  MenuBook,
 } from "@mui/icons-material";
 import { formatDistanceToNow } from "date-fns";
 import { useNavigate } from "react-router-dom";
@@ -191,7 +192,7 @@ export const FeaturedNewsCard: React.FC<FeaturedNewsCardProps> = ({
               </Typography>
             </Stack>
             <Stack direction="row" spacing={0.5} alignItems="center">
-              <AccessTime sx={{ fontSize: 16, color: "text.secondary" }} />
+              <MenuBook sx={{ fontSize: 16, color: "text.secondary" }} />
               <Typography variant="body2" color="text.secondary">
                 {readTime}
               </Typography>
