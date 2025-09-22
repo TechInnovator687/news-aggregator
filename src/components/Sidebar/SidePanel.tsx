@@ -3,8 +3,7 @@ import { Outlet } from "react-router-dom";
 import { Box, Drawer } from "@mui/material";
 import { SidebarContent } from "./SidebarContent";
 import { MobileTopBar } from "./MobileTopBar";
-
-const drawerWidth = 260;
+import { styles } from "./styles";
 
 export const SidePanel = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -14,22 +13,7 @@ export const SidePanel = () => {
     <Box sx={{ display: "flex" }}>
       <MobileTopBar onMenuClick={toggleMobile} />
 
-      <Drawer
-        variant="permanent"
-        open
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          display: { xs: "none" },
-          ["@media (min-width:768px)"]: { display: "block" },
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-            backgroundColor: "#fff",
-            borderRight: "1px solid #e0e0e0",
-          },
-        }}
-      >
+      <Drawer variant="permanent" open sx={styles.permanentDrawer}>
         <SidebarContent />
       </Drawer>
 
@@ -38,25 +22,12 @@ export const SidePanel = () => {
         open={mobileOpen}
         onClose={toggleMobile}
         ModalProps={{ keepMounted: true }}
-        sx={{
-          display: { xs: "block" },
-          ["@media (min-width:768px)"]: { display: "none" },
-          "& .MuiDrawer-paper": { width: drawerWidth, boxSizing: "border-box" },
-        }}
+        sx={styles.temporaryDrawer}
       >
         <SidebarContent onItemClick={toggleMobile} />
       </Drawer>
 
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-
-          p: 3,
-          minHeight: "100vh",
-          pt: { xs: 8, ["@media (min-width:768px)"]: 3 },
-        }}
-      >
+      <Box component="main" sx={styles.mainContent}>
         <Outlet />
       </Box>
     </Box>
