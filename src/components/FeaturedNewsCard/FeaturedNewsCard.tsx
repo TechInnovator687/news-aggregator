@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import { getRelativeTime } from "@utils/dateUtils";
 import { styles } from "./style";
 import { DEFAULT_FEATURED_NEWS } from "@utils/defaultNews";
+import { DEFAULT_SOURCE_COLOR } from "@utils/constants";
 
 export interface FeaturedNewsCardProps {
   image?: string;
@@ -47,7 +48,7 @@ export const FeaturedNewsCard = ({
   articleUrl,
 }: FeaturedNewsCardProps) => {
   const navigate = useNavigate();
-  const sourceColor = { bg: "#ECEFF1", border: "#607D8B", hoverBg: "#CFD8DC" };
+  const sourceColor = DEFAULT_SOURCE_COLOR;
 
   return (
     <Box sx={styles.container}>

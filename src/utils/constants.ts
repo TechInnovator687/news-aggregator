@@ -14,3 +14,9 @@ export const categories: { label: string; value: NewsCategory }[] = [
   { label: "Entertainment", value: NewsCategory.entertainment },
   { label: "World", value: NewsCategory.global },
 ];
+
+export const DEFAULT_SOURCE_COLOR = {
+  bg: "#ECEFF1",
+  border: "#607D8B",
+  hoverBg: "#CFD8DC",
+};

@@ -16,6 +16,7 @@ import { getRandomColor, sourceChipColors } from "@utils/colorUtils";
 import { styles } from "./styles";
 import { getRelativeTime } from "@utils/dateUtils";
 import { DEFAULT_FEATURED_NEWS } from "@utils/defaultNews";
+import { DEFAULT_SOURCE_COLOR } from "@utils/constants";
 
 export const NewsCard = ({
   title,
@@ -29,11 +30,7 @@ export const NewsCard = ({
   ...otherProps
 }: NewsCardProps & { readTime?: string; author?: string }) => {
   const cardColor = getRandomColor();
-  const sourceColor = sourceChipColors[source] || {
-    bg: "#ECEFF1",
-    border: "#607D8B",
-    hoverBg: "#CFD8DC",
-  };
+  const sourceColor = sourceChipColors[source] || DEFAULT_SOURCE_COLOR;
   return (
     <Card
       sx={styles.card}
