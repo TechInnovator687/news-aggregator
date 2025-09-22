@@ -9,14 +9,16 @@ import {
   Box,
   Divider,
   Avatar,
+  CircularProgress,
 } from "@mui/material";
 import { Home, Search, Settings } from "@mui/icons-material";
+import { useNews } from "@/context/NewsContext";
 
 const drawerWidth = 260;
 
 const SidePanel = () => {
   const location = useLocation();
-
+  const { news, loading } = useNews();
   const menuItems = [
     { label: "News Feed", icon: <Home fontSize="small" />, path: "/" },
     { label: "Search", icon: <Search fontSize="small" />, path: "/search" },
@@ -149,13 +151,13 @@ const SidePanel = () => {
                 fontWeight="bold"
                 color="text.primary"
               >
-                24
+                {loading ? <CircularProgress size={15} /> : news.length}
               </Typography>
             </Typography>
             <Typography variant="body2">
               Sources Active{" "}
               <Typography component="span" fontWeight="bold" color="primary">
-                7
+                3
               </Typography>
             </Typography>
             <Typography
