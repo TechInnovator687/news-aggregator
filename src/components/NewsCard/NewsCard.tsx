@@ -51,7 +51,8 @@ export const NewsCard = ({
   return (
     <Card
       sx={{
-        width: 380,
+        width: "100%",
+        maxWidth: 380,
         borderRadius: 3,
         overflow: "hidden",
         boxShadow: 3,
@@ -114,7 +115,7 @@ export const NewsCard = ({
           }}
         />
       </Box>
-      <CardContent sx={{ p: 2, minHeight: 150, flexGrow: 1 }}>
+      <CardContent sx={{ p: 2, minHeight: "auto", flexGrow: 1 }}>
         <Chip
           label={category}
           size="small"
@@ -166,8 +167,6 @@ export const NewsCard = ({
         sx={{
           px: 2,
           pb: 1,
-          flexDirection: "column",
-          alignItems: "stretch",
         }}
       >
         <Stack

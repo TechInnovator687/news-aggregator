@@ -13,24 +13,24 @@ const styles = {
     boxSizing: "border-box",
   },
   newsList: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    gap: "20px",
-    marginTop: "100px",
-  },
-  newsCard: {
-    flex: "1 1 calc(33.33% - 20px)",
-    maxWidth: "calc(33.33% - 20px)",
-    boxSizing: "border-box",
+    maxWidth: 1100,
+    margin: "40px auto 0 auto",
+    display: "grid",
+    gap: "24px",
+    justifyItems: "center",
+    gridTemplateColumns: "repeat(3, 1fr)",
     "@media (max-width: 1200px)": {
-      flex: "1 1 calc(50% - 20px)",
-      maxWidth: "calc(50% - 20px)",
+      gridTemplateColumns: "repeat(2, 1fr)",
     },
     "@media (max-width: 900px)": {
-      flex: "1 1 100%",
-      maxWidth: "100%",
+      gridTemplateColumns: "repeat(1, 1fr)",
     },
+  },
+
+  newsCard: {
+    width: "100%",
+    maxWidth: 380,
+    boxSizing: "border-box",
   },
 
   newsLoader: {
