@@ -15,16 +15,17 @@ import type { NewsCardProps } from "./types";
 import { getRandomColor, sourceChipColors } from "@utils/colorUtils";
 import { styles } from "./styles";
 import { getRelativeTime } from "@utils/dateUtils";
+import { DEFAULT_FEATURED_NEWS } from "@utils/defaultNews";
 
 export const NewsCard = ({
   title,
   date = new Date(),
   source,
-  category = "Business",
-  readTime = "1 min",
-  author = "David Martinez",
+  category = DEFAULT_FEATURED_NEWS.category,
+  readTime = DEFAULT_FEATURED_NEWS.readTime,
+  author = DEFAULT_FEATURED_NEWS.author,
   description,
-  imgUrl = "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+  imgUrl = DEFAULT_FEATURED_NEWS.image,
   ...otherProps
 }: NewsCardProps & { readTime?: string; author?: string }) => {
   const cardColor = getRandomColor();

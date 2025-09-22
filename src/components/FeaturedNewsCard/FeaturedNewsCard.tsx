@@ -20,6 +20,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { getRelativeTime } from "@utils/dateUtils";
 import { styles } from "./style";
+import { DEFAULT_FEATURED_NEWS } from "@utils/defaultNews";
 
 export interface FeaturedNewsCardProps {
   image?: string;
@@ -35,12 +36,12 @@ export interface FeaturedNewsCardProps {
 }
 
 export const FeaturedNewsCard = ({
-  image = "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80",
+  image = DEFAULT_FEATURED_NEWS.image,
   source,
   title,
   description = "",
   category,
-  author = "David Martinez",
+  author = DEFAULT_FEATURED_NEWS.author,
   date,
   readTime,
   articleUrl,
