@@ -143,6 +143,12 @@ VITE_NEWS_API_URL=https://newsapi.org/v2/top-headlines?pageSize=10&language=en&
 
 ## 🚀 Run the Application
 
+### Install Dependencies
+
+```bash
+npm install
+```
+
 ### Run with Docker
 
 ```bash
