@@ -17,8 +17,8 @@ import {
   Settings,
   MenuBook,
 } from "@mui/icons-material";
-import { formatDistanceToNow } from "date-fns";
 import { useNavigate } from "react-router-dom";
+import { getRelativeTime } from "@utils/dateUtils";
 
 export interface FeaturedNewsCardProps {
   image?: string;
@@ -262,8 +262,7 @@ export const FeaturedNewsCard = ({
             <Stack direction="row" spacing={0.5} alignItems="center">
               <AccessTime sx={{ fontSize: 16, color: "text.secondary" }} />
               <Typography variant="body2" color="text.secondary">
-                {date &&
-                  formatDistanceToNow(new Date(date), { addSuffix: true })}
+                {date && getRelativeTime(date)}
               </Typography>
             </Stack>
             <Stack direction="row" spacing={0.5} alignItems="center">
