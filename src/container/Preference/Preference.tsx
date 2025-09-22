@@ -11,21 +11,7 @@ import { Source, NewsCategory } from "../../types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useNews } from "@/context/NewsContext";
-
-const newsSources: { label: string; value: Source }[] = [
-  { label: "NewsAPI", value: Source.newsApi },
-  { label: "The Guardian", value: Source.guardian },
-  { label: "New York Times", value: Source.nytime },
-];
-
-const categories: { label: string; value: NewsCategory }[] = [
-  { label: "Technology", value: NewsCategory.technology },
-  { label: "Sports", value: NewsCategory.sports },
-  { label: "Politics", value: NewsCategory.politics },
-  { label: "Business", value: NewsCategory.business },
-  { label: "Entertainment", value: NewsCategory.entertainment },
-  { label: "World", value: NewsCategory.global },
-];
+import { categories, newsSources } from "@utils/constants";
 
 export const Preference = () => {
   const { filters, setFilters, onApplyFilters } = useNews();

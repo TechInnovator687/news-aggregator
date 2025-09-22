@@ -47,7 +47,6 @@ export const SidePanel = () => {
         <SidebarContent onItemClick={toggleMobile} />
       </Drawer>
 
-      {/* Main */}
       <Box
         component="main"
         sx={{

@@ -79,7 +79,6 @@ export const FeaturedNewsCard = ({
             sx={{ width: { xs: "100%", sm: "auto" } }}
           >
             <Button
-              fullWidth
               variant="outlined"
               startIcon={<Refresh />}
               sx={{
