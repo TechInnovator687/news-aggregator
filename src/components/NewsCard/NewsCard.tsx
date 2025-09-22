@@ -49,12 +49,13 @@ export const NewsCard = ({
     border: "#607D8B",
     hoverBg: "#CFD8DC",
   };
-  console.log({ otherProps, source }, "klk");
   return (
     <Card
       sx={{
         width: "100%",
         maxWidth: 380,
+        minHeight: 476,
+        maxHeight: 486,
         borderRadius: 3,
         overflow: "hidden",
         boxShadow: 3,
@@ -177,7 +178,8 @@ export const NewsCard = ({
               {author[0]}
             </Avatar>
             <Typography variant="body2" color="text.secondary">
-              {author}
+              {author.split(" ").slice(0, 3).join(" ")}
+              {author.split(" ").length > 15 ? "..." : ""}
             </Typography>
           </Stack>
           <Stack direction="row" spacing={0.5} alignItems="center">

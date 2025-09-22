@@ -55,33 +55,69 @@ export const FeaturedNewsCard = ({
       sx={{
         position: "relative",
         width: "100%",
-        maxWidth: 1100,
+        maxWidth: 1200,
         mx: "auto",
-        mt: 5,
+        mt: 0,
       }}
     >
-      <Stack
-        direction="row"
-        spacing={2}
-        sx={{ position: "absolute", top: -55, right: 0 }}
-      >
-        <Button
-          variant="outlined"
-          startIcon={<Refresh />}
-          sx={{ textTransform: "none", borderRadius: 2 }}
-          onClick={() => window.location.reload()}
+      <Box sx={{ position: "relative", mb: 5 }}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{ width: "100%" }}
         >
-          Refresh Feed
-        </Button>
-        <Button
-          variant="outlined"
-          startIcon={<Settings />}
-          sx={{ textTransform: "none", borderRadius: 2 }}
-          onClick={() => navigate("/preferences")}
-        >
-          Preferences
-        </Button>
-      </Stack>
+          <Typography variant="h4" fontWeight={700}>
+            Top Stories
+          </Typography>
+
+          <Stack direction="row" spacing={2}>
+            <Button
+              variant="outlined"
+              startIcon={<Refresh />}
+              sx={{
+                textTransform: "none",
+                borderRadius: 2,
+                color: "black",
+                borderColor: "black",
+                "&:hover": {
+                  color: "white",
+                  backgroundColor: "primary.main",
+                  borderColor: "primary.main",
+                },
+                "& .MuiSvgIcon-root": {
+                  color: "inherit",
+                },
+              }}
+              onClick={() => window.location.reload()}
+            >
+              Refresh Feed
+            </Button>
+
+            <Button
+              variant="outlined"
+              startIcon={<Settings />}
+              sx={{
+                textTransform: "none",
+                borderRadius: 2,
+                color: "black",
+                borderColor: "black",
+                "&:hover": {
+                  color: "white",
+                  backgroundColor: "primary.main",
+                  borderColor: "primary.main",
+                },
+                "& .MuiSvgIcon-root": {
+                  color: "inherit",
+                },
+              }}
+              onClick={() => navigate("/preferences")}
+            >
+              Preferences
+            </Button>
+          </Stack>
+        </Stack>
+      </Box>
 
       <Card
         sx={{

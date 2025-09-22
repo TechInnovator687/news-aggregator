@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Container } from "@mui/material";
+import { Box, CircularProgress, Container, Typography } from "@mui/material";
 import { NewsCard } from "@components/NewsCard";
 import styles from "./styles";
 import { useNews } from "@/context/NewsContext";
@@ -21,6 +21,12 @@ export const News = () => {
             articleUrl={featuredNews?.url || ""}
           />
         </Box>
+        <Box sx={styles.sectionHeader}>
+          <Typography variant="h5" fontWeight={800}>
+            More News
+          </Typography>
+        </Box>
+
         <Box sx={styles.newsList}>
           {newsList?.map((newsItem) => (
             <Box key={newsItem?.title} sx={styles.newsCard}>

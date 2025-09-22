@@ -55,7 +55,6 @@ class NewsAPI extends NewsService<NewsAPIResponse> {
   }
 
   protected normalizeResponse(data: NewsAPIResponse): NewsItem[] {
-    console.log(data, "data");
     return (
       data.articles?.map((item: NewsAPIArticle) => ({
         url: item.url ?? "",

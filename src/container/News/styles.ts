@@ -13,7 +13,7 @@ const styles = {
     boxSizing: "border-box",
   },
   newsList: {
-    maxWidth: 1100,
+    maxWidth: 1200,
     margin: "40px auto 0 auto",
     display: "grid",
     gap: "24px",
@@ -30,7 +30,16 @@ const styles = {
   newsCard: {
     width: "100%",
     maxWidth: 380,
+    minHeight: 456,
     boxSizing: "border-box",
+  },
+  sectionHeader: {
+    maxWidth: 1200,
+    margin: "32px auto 12px auto",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    px: 0,
   },
 
   newsLoader: {
