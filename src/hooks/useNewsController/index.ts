@@ -1,2 +1,1 @@
-export { useInfiniteScroll } from "./useInfiniteScroll";
 export { useNewsController } from "./useNewsController";

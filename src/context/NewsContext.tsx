@@ -1,5 +1,5 @@
+import { useNewsController } from "@hooks/useNewsController";
 import React, { createContext, useContext } from "react";
-import useNewsController from "@container/News/useNewsController";
 
 export const NewsContext = createContext<ReturnType<
   typeof useNewsController

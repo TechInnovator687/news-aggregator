@@ -6,7 +6,7 @@ import { useInfiniteScroll } from "@hooks/useInfiniteScroll";
 
 const selectedSources: Source[] = Object.keys(NewsServices) as Source[];
 
-const useNewsController = () => {
+export const useNewsController = () => {
   const [filters, setFilters] = useState<Filters>({
     category: null,
     dateRange: null,
@@ -78,5 +78,3 @@ const useNewsController = () => {
 
   return { filters, setFilters, news, loading, onApplyFilters };
 };
-
-export default useNewsController;
