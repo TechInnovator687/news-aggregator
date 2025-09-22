@@ -51,7 +51,7 @@ export const SidePanel = () => {
         component="main"
         sx={{
           flexGrow: 1,
-          bgcolor: "#f9fafb",
+
           p: 3,
           minHeight: "100vh",
           pt: { xs: 8, ["@media (min-width:768px)"]: 3 },
